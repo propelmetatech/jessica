@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Services - Jessica Eyebrow Threading</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;family=Jost:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "espresso": "#2C1F18",
+                        "secondary-fixed": "#ffdbc9",
+                        "inverse-primary": "#f5ba93",
+                        "surface-tint": "#815434",
+                        "tertiary-fixed-dim": "#f3bd7c",
+                        "secondary-container": "#ffd4be",
+                        "on-tertiary-container": "#fffbff",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e6e2dd",
+                        "toasted-cream": "#F2EAE0",
+                        "on-secondary-container": "#7a5a48",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "background": "#fdf9f4",
+                        "secondary-fixed-dim": "#e8bea8",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#ddd9d5",
+                        "tertiary-container": "#986c33",
+                        "on-surface": "#1c1c19",
+                        "outline": "#83746b",
+                        "on-background": "#1c1c19",
+                        "on-primary-container": "#fffbff",
+                        "on-secondary-fixed-variant": "#5d4030",
+                        "tertiary": "#7c541d",
+                        "secondary": "#785746",
+                        "on-surface-variant": "#51443c",
+                        "surface-bright": "#fdf9f4",
+                        "primary-fixed-dim": "#f5ba93",
+                        "on-primary-fixed-variant": "#653d1f",
+                        "primary-container": "#9a6a48",
+                        "surface-container-high": "#ebe8e3",
+                        "surface": "#fdf9f4",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#2c1608",
+                        "primary-fixed": "#ffdcc6",
+                        "outline-variant": "#d5c3b9",
+                        "on-primary-fixed": "#301400",
+                        "on-tertiary-fixed": "#2a1700",
+                        "inverse-surface": "#31302d",
+                        "surface-container": "#f1ede8",
+                        "tertiary-fixed": "#ffddb8",
+                        "surface-container-low": "#f7f3ee",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f4f0eb",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#643f08",
+                        "dusty-peach": "#E8C9B5",
+                        "surface-variant": "#e6e2dd",
+                        "warm-white": "#FFFDF9",
+                        "primary": "#7e5232"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem",
+                        "service-card": "4rem 0 0 0"
+                    },
+                    "spacing": {
+                        "section-v-desktop": "120px",
+                        "overlap-offset": "60px",
+                        "margin-mobile": "24px",
+                        "section-v-mobile": "72px",
+                        "gutter": "80px",
+                        "desktop-max-width": "1280px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Jost"],
+                        "display-h1-mobile": ["Cormorant Garamond"],
+                        "headline-h2-mobile": ["Cormorant Garamond"],
+                        "headline-h2": ["Cormorant Garamond"],
+                        "display-h1": ["Cormorant Garamond"],
+                        "body-main": ["Jost"],
+                        "body-lg": ["Cormorant Garamond"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["13px", { "lineHeight": "1", "letterSpacing": "0.12em", "fontWeight": "500" }],
+                        "display-h1-mobile": ["42px", { "lineHeight": "1.1", "fontWeight": "400" }],
+                        "headline-h2-mobile": ["28px", { "lineHeight": "1.25", "fontWeight": "400" }],
+                        "headline-h2": ["42px", { "lineHeight": "1.25", "fontWeight": "400" }],
+                        "display-h1": ["68px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+                        "body-main": ["16px", { "lineHeight": "1.75", "fontWeight": "300" }],
+                        "body-lg": ["22px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .service-shadow {
+            box-shadow: 0 10px 30px rgba(120, 87, 70, 0.08);
+        }
+        .masonry-grid {
+            column-count: 1;
+            column-gap: 1.5rem; /* 24px */
+        }
+        @media (min-width: 768px) {
+            .masonry-grid {
+                column-count: 2;
+                column-gap: 1.5rem; /* 24px */
+            }
+        }
+        @media (min-width: 1024px) {
+            .masonry-grid {
+                column-count: 3;
+                column-gap: 1.5rem; /* 24px */
+            }
+        }
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem; /* 24px */
+        }
+        .faq-answer {
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-out, padding 0.3s ease-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .faq-answer.open {
+            max-height: 500px;
+            opacity: 1;
+            padding-top: 1.25rem;
+            padding-bottom: 1.5rem;
+        }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+            background-color: #fdf9f4;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-main antialiased pb-24 md:pb-0 selection:bg-dusty-peach selection:text-espresso">
+<!-- TopAppBar Web -->
+<header class="hidden md:flex fixed top-0 w-full z-50 bg-background/90 backdrop-blur-md border-b border-outline-variant/30 flex justify-between items-center px-margin-mobile h-16 transition-all duration-300" id="main-nav">
+<div class="flex items-center gap-4 text-primary">
+<span class="material-symbols-outlined hover:text-dusty-peach transition-colors cursor-pointer" data-icon="menu">menu</span>
+</div>
+<div class="flex-col text-center">
+<span class="font-display-h1 text-[26px] italic text-primary leading-none block">Jessica</span>
+<span class="font-label-caps text-[11px] text-primary tracking-widest block uppercase">Eyebrow Threading</span>
+</div>
+<div class="flex items-center">
+<button class="font-label-caps text-label-caps text-primary border border-primary px-6 py-2 hover:bg-dusty-peach/20 transition-colors duration-300 tracking-widest uppercase">
+            BOOK NOW
+        </button>
+</div>
+</header>
+<!-- TopAppBar Mobile -->
+<header class="md:hidden fixed top-0 w-full z-50 bg-background/90 backdrop-blur-md border-b border-outline-variant/30 flex justify-between items-center px-margin-mobile h-16">
+<div class="flex items-center text-primary">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</div>
+<div class="text-center">
+<span class="font-display-h1-mobile text-[22px] italic text-primary leading-none block">Jessica</span>
+</div>
+<div class="flex items-center">
+<button class="font-label-caps text-label-caps text-primary tracking-widest uppercase">
+            BOOK
+        </button>
+</div>
+</header>
+<main class="pt-24 md:pt-32">
+<!-- Hero Section -->
+<section class="max-w-desktop-max-width mx-auto px-margin-mobile md:px-gutter mb-section-v-mobile md:mb-section-v-desktop relative">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<div class="lg:col-span-5 z-10 lg:-mr-overlap-offset">
+<h1 class="font-display-h1-mobile md:font-display-h1 text-display-h1-mobile md:text-display-h1 text-espresso mb-6">Our Handcrafted <br/><span class="italic text-primary">Services</span></h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 max-w-md">Experience the meticulous artistry of our threading and beauty services. Each treatment is tailored to your unique features in a serene, intimate environment.</p>
+</div>
+<div class="lg:col-span-7 relative">
+<div class="w-full h-[400px] md:h-[600px] bg-toasted-cream rounded-sm overflow-hidden shadow-2xl relative">
+<img alt="Close-up of a professional beauty treatment setup. Clean, high-end threading tools, soft cotton thread, and a serene treatment chair in a warm, boutique salon. Soft focus background, premium artisanal feel." class="w-full h-full object-cover opacity-90 transition-opacity duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_dp8p02QwMcBxlafdIlSh25Ssk1VC_98a3juQ4YnJE2--IXmQpXrCuuNfXGxGtjcg-r5VF8OZAzUC2UUrJFcQC7_5mQL0nTwSYnKLL2XTg909xzwFw0XuSWWM67kIsJNg3VUwSR70CAbe-OilZGxmqiIph__zQsO1wlQ1pUGeS5hqXpJBoqjnmpBAYB9ZP3g3PB-spqx5qJc406YvL6w2SuRaUYiBnro6j0pBAXewrNcB9idUx3DOTcPA2f8NEkcJ30GTUudkfuqC"/>
+<div class="absolute inset-0 bg-primary/5 mix-blend-overlay"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Masonry Services Section -->
+<section class="bg-surface-container-low py-section-v-mobile md:py-section-v-desktop border-t border-outline-variant/20">
+<div class="max-w-desktop-max-width mx-auto px-margin-mobile md:px-gutter">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+<div>
+<h2 class="font-headline-h2-mobile md:font-headline-h2 text-headline-h2-mobile md:text-headline-h2 text-espresso">The <span class="italic text-primary">Menu</span></h2>
+</div>
+<p class="font-body-main text-body-main text-on-surface-variant max-w-sm">Select from our curated menu of threading and tinting services, performed with absolute precision.</p>
+</div>
+<div class="masonry-grid">
+<!-- Service Card 1 -->
+<div class="masonry-item bg-background border border-dusty-peach/40 rounded-service-card p-8 service-shadow hover:-translate-y-2 transition-all duration-500 relative group overflow-hidden">
+<div class="absolute bottom-0 left-0 w-full h-[3px] bg-primary transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+<div class="flex justify-between items-start mb-6">
+<h3 class="font-headline-h2-mobile md:font-headline-h2 text-[32px] text-espresso leading-tight">Eyebrow<br/>Threading</h3>
+<span class="font-label-caps text-label-caps text-primary tracking-widest mt-2">$20</span>
+</div>
+<p class="font-body-main text-body-main text-on-surface-variant mb-6">Our signature service. We use premium 100% cotton thread to meticulously shape and define your brows, creating a clean, tailored arch that perfectly frames your face.</p>
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[18px]" data-icon="gesture">gesture</span>
+<span class="font-label-caps text-[11px] tracking-widest uppercase">15 Min</span>
+</div>
+</div>
+<!-- Service Card 2 -->
+<div class="masonry-item bg-background border border-dusty-peach/40 rounded-service-card p-8 service-shadow hover:-translate-y-2 transition-all duration-500 relative group overflow-hidden">
+<div class="absolute bottom-0 left-0 w-full h-[3px] bg-primary transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+<div class="flex justify-between items-start mb-6">
+<h3 class="font-headline-h2-mobile md:font-headline-h2 text-[32px] text-espresso leading-tight">Brow<br/>Lamination</h3>
+<span class="font-label-caps text-label-caps text-primary tracking-widest mt-2">$85</span>
+</div>
+<p class="font-body-main text-body-main text-on-surface-variant mb-6">A semi-permanent treatment that relaxes and realigns brow hairs. Perfect for taming unruly hairs and creating a fuller, more voluminous "fluffy" look.</p>
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[18px]" data-icon="spa">spa</span>
+<span class="font-label-caps text-[11px] tracking-widest uppercase">45 Min</span>
+</div>
+</div>
+<!-- Service Card 3 -->
+<div class="masonry-item bg-background border border-dusty-peach/40 rounded-service-card p-8 service-shadow hover:-translate-y-2 transition-all duration-500 relative group overflow-hidden">
+<div class="absolute bottom-0 left-0 w-full h-[3px] bg-primary transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+<div class="flex justify-between items-start mb-6">
+<h3 class="font-headline-h2-mobile md:font-headline-h2 text-[32px] text-espresso leading-tight">Custom<br/>Tinting</h3>
+<span class="font-label-caps text-label-caps text-primary tracking-widest mt-2">$25</span>
+</div>
+<p class="font-body-main text-body-main text-on-surface-variant mb-6">Enhance the depth and color of your brows with our gentle, vegetable-based dyes. Carefully color-matched to complement your natural skin tone and hair color.</p>
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[18px]" data-icon="palette">palette</span>
+<span class="font-label-caps text-[11px] tracking-widest uppercase">20 Min</span>
+</div>
+</div>
+<!-- Service Card 4 -->
+<div class="masonry-item bg-background border border-dusty-peach/40 rounded-service-card p-8 service-shadow hover:-translate-y-2 transition-all duration-500 relative group overflow-hidden">
+<div class="absolute bottom-0 left-0 w-full h-[3px] bg-primary transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+<div class="flex justify-between items-start mb-6">
+<h3 class="font-headline-h2-mobile md:font-headline-h2 text-[32px] text-espresso leading-tight">Upper Lip<br/>&amp; Chin</h3>
+<span class="font-label-caps text-label-caps text-primary tracking-widest mt-2">$15</span>
+</div>
+<p class="font-body-main text-body-main text-on-surface-variant mb-6">Gentle and precise removal of fine facial hair. Threading is far gentler on delicate facial skin compared to waxing, reducing redness and irritation.</p>
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[18px]" data-icon="face_retouching_natural">face_retouching_natural</span>
+<span class="font-label-caps text-[11px] tracking-widest uppercase">10 Min</span>
+</div>
+</div>
+<!-- Service Card 5 -->
+<div class="masonry-item bg-background border border-dusty-peach/40 rounded-service-card p-8 service-shadow hover:-translate-y-2 transition-all duration-500 relative group overflow-hidden">
+<div class="absolute bottom-0 left-0 w-full h-[3px] bg-primary transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+<div class="flex justify-between items-start mb-6">
+<h3 class="font-headline-h2-mobile md:font-headline-h2 text-[32px] text-espresso leading-tight">Full Face<br/>Threading</h3>
+<span class="font-label-caps text-label-caps text-primary tracking-widest mt-2">$55</span>
+</div>
+<p class="font-body-main text-body-main text-on-surface-variant mb-6">A comprehensive treatment covering brows, lip, chin, cheeks, and forehead. Leaves your skin feeling incredibly smooth and creates a flawless canvas for makeup application.</p>
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[18px]" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-label-caps text-[11px] tracking-widest uppercase">45 Min</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="bg-espresso relative overflow-hidden py-[72px] px-margin-mobile md:px-gutter">
+<div class="absolute inset-0 opacity-5" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E'); mix-blend-mode: overlay;"></div>
+<div class="max-w-4xl mx-auto text-center relative z-10">
+<span class="material-symbols-outlined text-dusty-peach text-4xl mb-8 block opacity-80" data-icon="format_quote">format_quote</span>
+<blockquote class="font-display-h1-mobile md:font-display-h1 text-[36px] md:text-[48px] text-white italic leading-tight mb-8">
+                "I’ve never had my brows look this symmetric and natural. The atmosphere is so calming, it feels less like an appointment and more like a retreat. Truly handcrafted elegance."
+            </blockquote>
+<cite class="font-label-caps text-label-caps text-dusty-peach tracking-widest uppercase not-italic block">
+                — Elena M., Loyal Client
+            </cite>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="py-section-v-mobile md:py-section-v-desktop bg-background w-full">
+<div class="max-w-3xl mx-auto px-margin-mobile md:px-0">
+<h2 class="font-headline-h2-mobile md:font-headline-h2 text-headline-h2-mobile md:text-headline-h2 text-espresso text-center mb-12">Frequent <span class="italic text-primary">Inquiries</span></h2>
+<div class="space-y-4">
+<!-- FAQ Item 1 -->
+<div class="border-b border-dusty-peach/30 pb-4">
+<button class="w-full flex justify-between items-center text-left focus:outline-none group py-2" onclick="toggleFaq(this)">
+<span class="font-body-lg text-body-lg text-espresso group-hover:text-primary transition-colors pr-4">Is threading painful?</span>
+<span class="material-symbols-outlined text-primary transform transition-transform duration-300 group-hover:rotate-180" data-icon="expand_more">expand_more</span>
+</button>
+<div class="faq-answer">
+<p class="font-body-main text-body-main text-on-surface-variant leading-relaxed pr-8">While everyone's pain tolerance is different, threading is generally considered less painful than waxing because it doesn't pull on the skin, only the hair. We work gently to ensure your comfort and provide a soothing experience.</p>
+</div>
+</div>
+<!-- FAQ Item 2 -->
+<div class="border-b border-dusty-peach/30 pb-4">
+<button class="w-full flex justify-between items-center text-left focus:outline-none group py-2" onclick="toggleFaq(this)">
+<span class="font-body-lg text-body-lg text-espresso group-hover:text-primary transition-colors pr-4">How long do results last?</span>
+<span class="material-symbols-outlined text-primary transform transition-transform duration-300 group-hover:rotate-180" data-icon="expand_more">expand_more</span>
+</button>
+<div class="faq-answer">
+<p class="font-body-main text-body-main text-on-surface-variant leading-relaxed pr-8">Typically, hair regrowth occurs within 3 to 4 weeks depending on your individual hair growth cycle. Consistent threading can actually slow down hair growth over time, leading to finer and sparser regrowth.</p>
+</div>
+</div>
+<!-- FAQ Item 3 -->
+<div class="border-b border-dusty-peach/30 pb-4">
+<button class="w-full flex justify-between items-center text-left focus:outline-none group py-2" onclick="toggleFaq(this)">
+<span class="font-body-lg text-body-lg text-espresso group-hover:text-primary transition-colors pr-4">Can I wear makeup after my appointment?</span>
+<span class="material-symbols-outlined text-primary transform transition-transform duration-300 group-hover:rotate-180" data-icon="expand_more">expand_more</span>
+</button>
+<div class="faq-answer">
+<p class="font-body-main text-body-main text-on-surface-variant leading-relaxed pr-8">We recommend waiting at least 2-4 hours before applying heavy makeup or skincare products to the threaded area. This allows the pores to close naturally and prevents potential irritation or breakouts.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full relative bg-espresso border-t border-secondary/20 flex flex-col items-center text-center py-section-v-mobile px-margin-mobile gap-6 mb-[80px] md:mb-0">
+<h2 class="font-display-h1 text-display-h1-mobile text-toasted-cream italic">Jessica</h2>
+<div class="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-4">
+<a class="font-body-main text-body-main text-toasted-cream/70 hover:text-dusty-peach transition-colors" href="#">Privacy Policy</a>
+<a class="font-body-main text-body-main text-toasted-cream/70 hover:text-dusty-peach transition-colors" href="#">Terms of Service</a>
+<a class="font-body-main text-body-main text-toasted-cream/70 hover:text-dusty-peach transition-colors" href="#">WhatsApp Support</a>
+</div>
+<p class="font-body-main text-body-main text-toasted-cream/50 text-sm">© 2024 Jessica Eyebrow Threading. Handcrafted Elegance.</p>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center pt-2 pb-safe px-4 z-50 shadow-[0_-4px_20px_rgba(120,87,70,0.08)] bg-background">
+<!-- Home (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all duration-300 w-16 h-14" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]" data-icon="home">home</span>
+<span class="font-label-caps text-[10px] tracking-wider uppercase">Home</span>
+</a>
+<!-- Services (Active) -->
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]" data-icon="content_cut" data-weight="fill" style="font-variation-settings: 'FILL' 1;">content_cut</span>
+<span class="font-label-caps text-[10px] tracking-wider uppercase font-medium">Services</span>
+</a>
+<!-- Pricing (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all duration-300 w-16 h-14" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]" data-icon="payments">payments</span>
+<span class="font-label-caps text-[10px] tracking-wider uppercase">Pricing</span>
+</a>
+<!-- Contact (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all duration-300 w-16 h-14" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]" data-icon="chat_bubble">chat_bubble</span>
+<span class="font-label-caps text-[10px] tracking-wider uppercase">Contact</span>
+</a>
+</nav>
+<script>
+    // Simple FAQ Accordion Toggle
+    function toggleFaq(button) {
+        const answer = button.nextElementSibling;
+        const icon = button.querySelector('.material-symbols-outlined');
+        const isOpen = answer.classList.contains('open');
+        
+        // Close all other answers (optional for better user experience)
+        // document.querySelectorAll('.faq-answer').forEach(el => el.classList.remove('open'));
+        // document.querySelectorAll('.group .material-symbols-outlined').forEach(el => el.style.transform = 'rotate(0deg)');
+
+        answer.classList.toggle('open');
+        if(!isOpen) {
+            icon.style.transform = 'rotate(180deg)';
+        } else {
+            icon.style.transform = 'rotate(0deg)';
+        }
+    }
+
+    // Top Nav Scroll Effect (Desktop)
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('main-nav');
+        if (window.scrollY > 50) {
+            nav.classList.add('shadow-sm');
+            nav.classList.replace('bg-background/90', 'bg-background/95');
+        } else {
+            nav.classList.remove('shadow-sm');
+            nav.classList.replace('bg-background/95', 'bg-background/90');
+        }
+    });
+</script>
+</body></html>

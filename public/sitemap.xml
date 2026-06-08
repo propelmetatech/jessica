@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Core Pages -->
+  <url>
+    <loc>https://jessicaeyebrowthreading.com/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://jessicaeyebrowthreading.com/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jessicaeyebrowthreading.com/services</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://jessicaeyebrowthreading.com/pricing</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://jessicaeyebrowthreading.com/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jessicaeyebrowthreading.com/contact</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jessicaeyebrowthreading.com/blog</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Blog Articles -->
+  <url><loc>https://jessicaeyebrowthreading.com/blog/benefits-of-eyebrow-threading</loc></url>
+  <url><loc>https://jessicaeyebrowthreading.com/blog/threading-vs-waxing</loc></url>
+  <url><loc>https://jessicaeyebrowthreading.com/blog/how-to-maintain-perfect-brows</loc></url>
+  <url><loc>https://jessicaeyebrowthreading.com/blog/best-brow-shapes-for-face-types</loc></url>
+  <url><loc>https://jessicaeyebrowthreading.com/blog/what-is-brow-lamination</loc></url>
+  <url><loc>https://jessicaeyebrowthreading.com/blog/how-often-should-you-thread-brows</loc></url>
+  <url><loc>https://jessicaeyebrowthreading.com/blog/sensitive-skin-hair-removal-tips</loc></url>
+  <url><loc>https://jessicaeyebrowthreading.com/blog/best-brow-tint-shades</loc></url>
+  <url><loc>https://jessicaeyebrowthreading.com/blog/brow-trends-2026</loc></url>
+  <url><loc>https://jessicaeyebrowthreading.com/blog/full-face-threading-benefits</loc></url>
+  <url><loc>https://jessicaeyebrowthreading.com/blog/how-to-prepare-for-brow-appointments</loc></url>
+  <url><loc>https://jessicaeyebrowthreading.com/blog/does-threading-hurt</loc></url>
+  <url><loc>https://jessicaeyebrowthreading.com/blog/aftercare-tips-for-threading</loc></url>
+  <url><loc>https://jessicaeyebrowthreading.com/blog/why-brow-shape-matters</loc></url>
+  <url><loc>https://jessicaeyebrowthreading.com/blog/best-beauty-treatments-before-events</loc></url>
+  <url><loc>https://jessicaeyebrowthreading.com/blog/brow-mapping-explained</loc></url>
+  <url><loc>https://jessicaeyebrowthreading.com/blog/lash-tinting-benefits</loc></url>
+  <url><loc>https://jessicaeyebrowthreading.com/blog/beauty-routine-essentials</loc></url>
+  <url><loc>https://jessicaeyebrowthreading.com/blog/best-affordable-beauty-services-okc</loc></url>
+  <url><loc>https://jessicaeyebrowthreading.com/blog/how-to-grow-fuller-brows-naturally</loc></url>
+</urlset>
