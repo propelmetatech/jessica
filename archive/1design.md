@@ -1,0 +1,8 @@
+--color-bg:         #FAF6F1    /* Warm parchment — base background */
+--color-surface:    #F2EAE0    /* Toasted cream — card/section backgrounds */
+--color-mocha:      #6B4C3B    /* Deep mocha — primary text, headings */
+--color-caramel:    #B07D5A    /* Caramel bronze — accent, CTA buttons */
+--color-blush:      #E8C9B5    /* Dusty peach — soft borders, dividers */
+--color-dark:       #2C1F18    /* Espresso — nav text, footer */
+--color-white:      #FFFDF9    /* Warm white — hero overlay text */
+--color-gold:       #C9975A    /* Antique gold — hover states, icons */

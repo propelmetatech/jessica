@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pricing &amp; Services - Jessica Eyebrow Threading</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Jost:ital,wght@0,300;0,400;0,500;1,300;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#ffdcc6",
+                        "surface-container": "#f1ede8",
+                        "on-background": "#1c1c19",
+                        "on-surface-variant": "#51443c",
+                        "secondary-fixed": "#ffdbc9",
+                        "inverse-primary": "#f5ba93",
+                        "outline-variant": "#d5c3b9",
+                        "on-primary-fixed-variant": "#653d1f",
+                        "primary": "#7e5232",
+                        "tertiary-fixed-dim": "#f3bd7c",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#ddd9d5",
+                        "tertiary-fixed": "#ffddb8",
+                        "secondary-container": "#ffd4be",
+                        "toasted-cream": "#F2EAE0",
+                        "on-secondary": "#ffffff",
+                        "on-surface": "#1c1c19",
+                        "on-secondary-fixed-variant": "#5d4030",
+                        "on-tertiary-fixed-variant": "#643f08",
+                        "on-secondary-container": "#7a5a48",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#301400",
+                        "on-error": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#9a6a48",
+                        "on-tertiary-fixed": "#2a1700",
+                        "dusty-peach": "#E8C9B5",
+                        "tertiary-container": "#986c33",
+                        "surface-tint": "#815434",
+                        "espresso": "#2C1F18",
+                        "primary-fixed-dim": "#f5ba93",
+                        "on-primary": "#ffffff",
+                        "secondary": "#785746",
+                        "inverse-surface": "#31302d",
+                        "tertiary": "#7c541d",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e6e2dd",
+                        "error": "#ba1a1a",
+                        "warm-white": "#FFFDF9",
+                        "surface-bright": "#fdf9f4",
+                        "secondary-fixed-dim": "#e8bea8",
+                        "surface-container-low": "#f7f3ee",
+                        "surface-container-high": "#ebe8e3",
+                        "outline": "#83746b",
+                        "inverse-on-surface": "#f4f0eb",
+                        "on-tertiary-container": "#fffbff",
+                        "on-primary-container": "#fffbff",
+                        "background": "#fdf9f4",
+                        "on-secondary-fixed": "#2c1608",
+                        "surface-container-highest": "#e6e2dd",
+                        "surface": "#fdf9f4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "section-v-mobile": "72px",
+                        "overlap-offset": "60px",
+                        "desktop-max-width": "1280px",
+                        "section-v-desktop": "120px",
+                        "gutter": "80px",
+                        "margin-mobile": "24px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Jost"],
+                        "display-h1": ["Cormorant Garamond"],
+                        "headline-h2": ["Cormorant Garamond"],
+                        "body-main": ["Jost"],
+                        "body-lg": ["Cormorant Garamond"],
+                        "headline-h2-mobile": ["Cormorant Garamond"],
+                        "display-h1-mobile": ["Cormorant Garamond"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["13px", { "lineHeight": "1", "letterSpacing": "0.12em", "fontWeight": "500" }],
+                        "display-h1": ["68px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+                        "headline-h2": ["42px", { "lineHeight": "1.25", "fontWeight": "400" }],
+                        "body-main": ["16px", { "lineHeight": "1.75", "fontWeight": "300" }],
+                        "body-lg": ["22px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-h2-mobile": ["28px", { "lineHeight": "1.25", "fontWeight": "400" }],
+                        "display-h1-mobile": ["42px", { "lineHeight": "1.1", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .btn-primary {
+            position: relative;
+            overflow: hidden;
+            background-color: theme('colors.primary');
+            color: white;
+            font-family: theme('fontFamily.label-caps');
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            line-height: 1;
+            text-transform: uppercase;
+            padding: 16px 32px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: theme('colors.espresso');
+            transition: width 0.3s ease;
+            z-index: 1;
+        }
+        
+        .btn-primary:hover::before {
+            width: 100%;
+        }
+        
+        .btn-primary span {
+            position: relative;
+            z-index: 2;
+        }
+
+        .dot-leader {
+            flex: 1;
+            border-bottom: 1px dotted theme('colors.dusty-peach');
+            margin: 0 12px;
+            position: relative;
+            top: -6px;
+        }
+        
+        /* Floating WhatsApp Icon */
+        .fab-whatsapp {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 56px;
+            height: 56px;
+            background-color: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+            z-index: 100;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .fab-whatsapp:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+        }
+        
+        .fab-whatsapp .material-symbols-outlined {
+            color: white;
+            font-size: 28px;
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-main antialiased selection:bg-dusty-peach/30 selection:text-primary">
+<!-- TopAppBar (Desktop) -->
+<header class="hidden md:flex justify-between items-center px-gutter h-24 w-full bg-background border-b border-outline-variant/30 sticky top-0 z-50">
+<div class="flex flex-col">
+<span class="font-display-h1-mobile italic text-primary text-[26px] leading-none">Jessica</span>
+<span class="font-label-caps text-[11px] text-on-surface-variant tracking-widest uppercase">Eyebrow Threading</span>
+</div>
+<nav class="flex gap-8">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Home</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Services</a>
+<a class="font-label-caps text-label-caps text-primary border-b border-primary pb-1" href="#">Pricing</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Contact</a>
+</nav>
+<button class="btn-primary">
+<span>BOOK NOW</span>
+</button>
+</header>
+<!-- TopAppBar (Mobile) -->
+<header class="flex md:hidden fixed top-0 w-full z-50 justify-between items-center px-margin-mobile h-16 w-full bg-surface/90 backdrop-blur-md border-b border-outline-variant/30">
+<button aria-label="Menu" class="text-primary p-2 -ml-2">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="flex flex-col items-center">
+<span class="font-display-h1-mobile italic text-primary text-[22px] leading-none">Jessica</span>
+<span class="font-label-caps text-[9px] text-on-surface-variant tracking-widest uppercase mt-0.5">Eyebrow Threading</span>
+</div>
+<button class="font-label-caps text-[11px] text-primary tracking-widest uppercase p-2 -mr-2">
+            BOOK
+        </button>
+</header>
+<main class="w-full pt-24 md:pt-12 pb-section-v-mobile md:pb-section-v-desktop flex flex-col items-center justify-center min-h-screen">
+<div class="w-full max-w-desktop-max-width px-margin-mobile md:px-gutter mx-auto">
+<div class="bg-toasted-cream rounded-xl p-8 md:p-16 lg:p-24 shadow-[0_8px_30px_rgba(126,82,50,0.04)] border border-outline-variant/20 relative">
+<!-- Header Section -->
+<div class="text-center mb-16 md:mb-24 max-w-2xl mx-auto">
+<span class="font-label-caps text-label-caps text-on-surface-variant tracking-[0.2em] mb-4 block uppercase">Spa Menu</span>
+<h1 class="font-display-h1 text-display-h1-mobile md:text-display-h1 text-primary mb-6">Pricing &amp; Services</h1>
+<p class="font-body-main text-body-main text-on-surface-variant">
+                        Transparent pricing for our handcrafted treatments. Each service is tailored to your unique facial structure, performed with unhurried precision.
+                    </p>
+</div>
+<!-- Services Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-16">
+<!-- Category 1 -->
+<div>
+<div class="flex items-center gap-3 mb-8 border-b border-outline-variant/30 pb-4">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="content_cut">content_cut</span>
+<h2 class="font-headline-h2 text-headline-h2-mobile md:text-[32px] text-on-surface">Signature Brows</h2>
+</div>
+<div class="space-y-8">
+<div class="group cursor-default">
+<div class="flex items-baseline justify-between w-full mb-1">
+<h3 class="font-body-lg text-[20px] text-primary group-hover:text-espresso transition-colors">Eyebrow Threading</h3>
+<div class="dot-leader"></div>
+<span class="font-body-lg text-[20px] text-primary">$15</span>
+</div>
+<p class="font-body-main text-[14px] text-on-surface-variant leading-snug">Our signature shaping tailored to your bone structure.</p>
+</div>
+<div class="group cursor-default">
+<div class="flex items-baseline justify-between w-full mb-1">
+<h3 class="font-body-lg text-[20px] text-primary group-hover:text-espresso transition-colors">Eyebrow Tweezing</h3>
+<div class="dot-leader"></div>
+<span class="font-body-lg text-[20px] text-primary">$18</span>
+</div>
+<p class="font-body-main text-[14px] text-on-surface-variant leading-snug">Gentle alternative for highly sensitive skin.</p>
+</div>
+<div class="group cursor-default">
+<div class="flex items-baseline justify-between w-full mb-1">
+<h3 class="font-body-lg text-[20px] text-primary group-hover:text-espresso transition-colors">Men's Brow Grooming</h3>
+<div class="dot-leader"></div>
+<span class="font-body-lg text-[20px] text-primary">$15</span>
+</div>
+<p class="font-body-main text-[14px] text-on-surface-variant leading-snug">Clean up and natural shaping.</p>
+</div>
+</div>
+</div>
+<!-- Category 2 -->
+<div>
+<div class="flex items-center gap-3 mb-8 border-b border-outline-variant/30 pb-4">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="face_retouching_natural">face_retouching_natural</span>
+<h2 class="font-headline-h2 text-headline-h2-mobile md:text-[32px] text-on-surface">Face Threading</h2>
+</div>
+<div class="space-y-8">
+<div class="group cursor-default">
+<div class="flex items-baseline justify-between w-full mb-1">
+<h3 class="font-body-lg text-[20px] text-primary group-hover:text-espresso transition-colors">Upper Lip</h3>
+<div class="dot-leader"></div>
+<span class="font-body-lg text-[20px] text-primary">$8</span>
+</div>
+<p class="font-body-main text-[14px] text-on-surface-variant leading-snug">Precise hair removal for a smooth finish.</p>
+</div>
+<div class="group cursor-default">
+<div class="flex items-baseline justify-between w-full mb-1">
+<h3 class="font-body-lg text-[20px] text-primary group-hover:text-espresso transition-colors">Chin</h3>
+<div class="dot-leader"></div>
+<span class="font-body-lg text-[20px] text-primary">$10</span>
+</div>
+<p class="font-body-main text-[14px] text-on-surface-variant leading-snug">Targeted removal for coarse or fine hairs.</p>
+</div>
+<div class="group cursor-default">
+<div class="flex items-baseline justify-between w-full mb-1">
+<h3 class="font-body-lg text-[20px] text-primary group-hover:text-espresso transition-colors">Full Face</h3>
+<div class="dot-leader"></div>
+<span class="font-body-lg text-[20px] text-primary">$45</span>
+</div>
+<p class="font-body-main text-[14px] text-on-surface-variant leading-snug">Comprehensive fuzz removal including brows.</p>
+</div>
+</div>
+</div>
+<!-- Category 3 -->
+<div>
+<div class="flex items-center gap-3 mb-8 border-b border-outline-variant/30 pb-4">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="brush">brush</span>
+<h2 class="font-headline-h2 text-headline-h2-mobile md:text-[32px] text-on-surface">Tinting &amp; Lamination</h2>
+</div>
+<div class="space-y-8">
+<div class="group cursor-default">
+<div class="flex items-baseline justify-between w-full mb-1">
+<h3 class="font-body-lg text-[20px] text-primary group-hover:text-espresso transition-colors">Brow Tint</h3>
+<div class="dot-leader"></div>
+<span class="font-body-lg text-[20px] text-primary">$20</span>
+</div>
+<p class="font-body-main text-[14px] text-on-surface-variant leading-snug">Custom color blended to enhance natural brows.</p>
+</div>
+<div class="group cursor-default">
+<div class="flex items-baseline justify-between w-full mb-1">
+<h3 class="font-body-lg text-[20px] text-primary group-hover:text-espresso transition-colors">Lash Tint</h3>
+<div class="dot-leader"></div>
+<span class="font-body-lg text-[20px] text-primary">$25</span>
+</div>
+<p class="font-body-main text-[14px] text-on-surface-variant leading-snug">Deepening of natural lashes for a mascara effect.</p>
+</div>
+<div class="group cursor-default">
+<div class="flex items-baseline justify-between w-full mb-1">
+<h3 class="font-body-lg text-[20px] text-primary group-hover:text-espresso transition-colors">Brow Lamination</h3>
+<div class="dot-leader"></div>
+<span class="font-body-lg text-[20px] text-primary">$80</span>
+</div>
+<p class="font-body-main text-[14px] text-on-surface-variant leading-snug">Restructuring brow hairs to keep them in a desired shape.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- CTA Button -->
+<div class="mt-20 flex justify-center">
+<button class="btn-primary">
+<span>BOOK AN APPOINTMENT</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full relative bg-espresso border-t border-secondary/20 flex flex-col items-center text-center py-section-v-mobile px-margin-mobile gap-6 text-toasted-cream">
+<div class="w-full max-w-desktop-max-width mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-12 text-left md:text-center">
+<div class="flex flex-col gap-4 text-left">
+<a class="font-body-main text-[14px] text-toasted-cream/70 hover:text-dusty-peach transition-colors" href="#">Privacy Policy</a>
+<a class="font-body-main text-[14px] text-toasted-cream/70 hover:text-dusty-peach transition-colors" href="#">Terms of Service</a>
+<a class="font-body-main text-[14px] text-toasted-cream/70 hover:text-dusty-peach transition-colors" href="#">WhatsApp Support</a>
+</div>
+<div class="flex flex-col gap-4 text-left">
+<span class="font-body-main text-[14px] text-toasted-cream/70">Contact us Jessica</span>
+<span class="font-body-main text-[14px] text-toasted-cream/70">+7 (303) 453-1000</span>
+<span class="font-body-main text-[14px] text-toasted-cream/70">jessica@gmailng.com</span>
+</div>
+<div class="flex flex-col gap-4 text-left">
+<a class="font-body-main text-[14px] text-toasted-cream/70 hover:text-dusty-peach transition-colors" href="#">Contact</a>
+<a class="font-body-main text-[14px] text-toasted-cream/70 hover:text-dusty-peach transition-colors" href="#">Location</a>
+<a class="font-body-main text-[14px] text-toasted-cream/70 hover:text-dusty-peach transition-colors" href="#">FAQ</a>
+</div>
+</div>
+<div class="mt-12 pt-8 border-t border-toasted-cream/10 w-full max-w-desktop-max-width mx-auto">
+<p class="font-body-main text-[12px] text-toasted-cream/50">© 2024 Jessica Eyebrow Threading. Handcrafted Elegance.</p>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center pt-2 pb-safe px-4 bg-warm-white shadow-[0_-4px_20px_rgba(120,87,70,0.08)] z-50">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all duration-300 w-16 h-14" href="#">
+<span class="material-symbols-outlined text-2xl mb-1" data-icon="home">home</span>
+<span class="font-label-caps text-[10px] uppercase">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all duration-300 w-16 h-14" href="#">
+<span class="material-symbols-outlined text-2xl mb-1" data-icon="content_cut">content_cut</span>
+<span class="font-label-caps text-[10px] uppercase">Services</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 h-14 scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined text-2xl mb-1" data-icon="payments">payments</span>
+<span class="font-label-caps text-[10px] uppercase">Pricing</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all duration-300 w-16 h-14" href="#">
+<span class="material-symbols-outlined text-2xl mb-1" data-icon="chat_bubble">chat_bubble</span>
+<span class="font-label-caps text-[10px] uppercase">Contact</span>
+</a>
+</nav>
+<!-- Floating WhatsApp Icon -->
+<div aria-label="Chat on WhatsApp" class="fab-whatsapp hidden md:flex">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+</div>
+</body></html>
