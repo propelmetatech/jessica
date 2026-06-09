@@ -84,7 +84,7 @@ const About = () => {
             <span className="font-body text-[13px] font-medium text-primary tracking-[0.2em] mb-4 block uppercase">
               Our Story
             </span>
-            <h1 className="font-display text-[44px] md:text-[64px] text-espresso mb-8 leading-tight">
+            <h1 className="font-display text-[32px] sm:text-[44px] md:text-[64px] text-espresso mb-8 leading-tight">
               About <br className="md:hidden" /><span className="italic text-primary">Jessica Eyebrow Threading</span>
             </h1>
             <p className="font-body text-[16px] md:text-[18px] text-on-surface-variant leading-relaxed mb-6">

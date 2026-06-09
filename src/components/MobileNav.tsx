@@ -42,9 +42,15 @@ const MobileNav = () => {
         })}
       </nav>
       {/* Floating WhatsApp Icon */}
-      <div aria-label="Chat on WhatsApp" className="fab-whatsapp hidden md:flex">
+      <a
+        href="https://wa.me/15722405888?text=Hi%20Jessica!%20%F0%9F%91%8B%20I'd%20love%20to%20book%20an%20appointment.%20Could%20you%20please%20share%20your%20available%20slots%3F"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat on WhatsApp"
+        className="fab-whatsapp flex"
+      >
         <span className="material-symbols-outlined" data-icon="chat">chat</span>
-      </div>
+      </a>
     </>
   );
 };

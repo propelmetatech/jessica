@@ -6,7 +6,7 @@ import { useHeroReveal, useScrollReveal } from '../hooks/useScrollReveal';
 
 const Blog = () => {
   const heroVisible = useHeroReveal();
-  const [gridRef, gridVisible] = useScrollReveal();
+  const [gridRef, gridVisible] = useScrollReveal(0.05);
 
   const schema = {
     "@context": "https://schema.org",
@@ -101,8 +101,8 @@ const Blog = () => {
               className="group flex flex-col h-full bg-surface-container-low rounded-2xl border border-outline-variant/30 overflow-hidden hover:shadow-[0_10px_30px_rgba(126,82,50,0.08)] hover:border-dusty-peach transition-all duration-300"
               style={{
                 opacity: gridVisible ? 1 : 0,
-                transform: gridVisible ? 'translateY(0)' : 'translateY(40px)',
-                transition: `opacity 0.6s ease-out ${idx * 80}ms, transform 0.6s ease-out ${idx * 80}ms`,
+                transform: gridVisible ? 'translateY(0)' : 'translateY(24px)',
+                transition: `opacity 0.35s ease-out ${idx * 40}ms, transform 0.35s ease-out ${idx * 40}ms`,
               }}
             >
               <div className="p-6 md:p-8 flex flex-col flex-grow">

@@ -213,9 +213,15 @@ const Contact = () => {
                   </div>
                   <h2 className="font-body text-[11px] font-semibold tracking-[0.15em] uppercase text-espresso">Hours</h2>
                 </div>
-                <div className="font-body text-[15px] text-on-surface-variant leading-relaxed">
-                  <p className="font-medium text-on-surface">9:00 AM CST – 7:00 PM CST</p>
-                  <p className="text-on-surface-variant">Daily</p>
+                <div className="font-body text-[14px] text-on-surface-variant leading-relaxed space-y-1">
+                  <div className="flex justify-between gap-4">
+                    <span className="text-on-surface font-medium">Tue – Sun</span>
+                    <span>11:00 AM CST – 8:00 PM CST</span>
+                  </div>
+                  <div className="flex justify-between gap-4">
+                    <span className="text-on-surface font-medium">Monday</span>
+                    <span className="text-primary">Closed</span>
+                  </div>
                 </div>
               </div>
             </div>

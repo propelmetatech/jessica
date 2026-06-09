@@ -160,11 +160,7 @@ const BlogPost = () => {
               <span>Call 572-240-5888</span>
             </a>
           </div>
-          <div className="mt-6 pt-6 border-t border-[#d5c3b9]/40">
-            <a href="https://jessicaeyebrowthreading.com" className="font-body text-[13px] text-primary hover:underline font-medium">
-              Visit jessicaeyebrowthreading.com
-            </a>
-          </div>
+
         </div>
       </article>
     </div>

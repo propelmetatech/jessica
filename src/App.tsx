@@ -4,6 +4,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import MobileNav from './components/MobileNav';
+import SocialSidebar from './components/SocialSidebar';
 
 // Lazy load all pages for code-splitting
 const Home = lazy(() => import('./pages/Home'));
@@ -38,6 +39,7 @@ function Layout() {
       </main>
       <Footer />
       <MobileNav />
+      <SocialSidebar />
     </div>
   );
 }

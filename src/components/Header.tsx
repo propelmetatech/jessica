@@ -44,7 +44,7 @@ const Header = () => {
     <>
       {/* TopAppBar (Desktop) */}
       <header 
-        className={`hidden md:flex justify-between items-center px-gutter h-24 w-full border-b border-outline-variant/30 fixed top-0 z-50 transition-colors duration-300 ${
+        className={`hidden lg:flex justify-between items-center px-gutter h-24 w-full border-b border-outline-variant/30 fixed top-0 z-50 transition-colors duration-300 ${
           isScrolled ? 'bg-background/95 shadow-sm' : 'bg-background/90'
         } backdrop-blur-md`}
       >
@@ -79,7 +79,7 @@ const Header = () => {
       </header>
 
       {/* TopAppBar (Mobile) */}
-      <header className="flex md:hidden fixed top-0 w-full z-50 justify-between items-center px-margin-mobile h-16 bg-surface/90 backdrop-blur-md border-b border-outline-variant/30">
+      <header className="flex lg:hidden fixed top-0 w-full z-50 justify-between items-center px-margin-mobile h-16 bg-surface/90 backdrop-blur-md border-b border-outline-variant/30">
         <button 
           aria-label="Menu" 
           className="text-primary p-2 -ml-2 cursor-pointer"
@@ -91,17 +91,17 @@ const Header = () => {
           <img src="/Logo.jpeg" alt="Jessica Eyebrow Threading Logo" className="w-9 h-9 rounded-full object-cover border border-outline-variant/30" />
           <div className="flex flex-col">
             <span className="font-display italic text-primary text-[22px] leading-none">Jessica</span>
-            <span className="font-body text-[9px] font-medium text-on-surface-variant tracking-widest uppercase mt-0.5">Eyebrow Threading</span>
+            <span className="font-body text-[9px] font-medium text-on-surface-variant tracking-widest uppercase mt-0.5 hidden min-[360px]:block">Eyebrow Threading</span>
           </div>
         </Link>
-        <Link to="/pricing#book-appointment" className="font-body text-[11px] font-medium text-primary tracking-widest uppercase p-2 -mr-2">
-            BOOK
+        <Link to="/pricing#book-appointment" className="btn-primary text-[10px] py-1.5 px-3 hidden xs:inline-flex min-[360px]:inline-flex">
+          <span>BOOK NOW</span>
         </Link>
       </header>
 
       {/* Mobile Drawer Backdrop */}
       <div 
-        className={`fixed inset-0 bg-espresso/40 backdrop-blur-xs z-[100] md:hidden transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-espresso/40 backdrop-blur-xs z-[100] lg:hidden transition-opacity duration-300 ${
           isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
         onClick={() => setIsMenuOpen(false)}
@@ -109,7 +109,7 @@ const Header = () => {
 
       {/* Mobile Drawer Panel */}
       <div 
-        className={`fixed top-0 left-0 bottom-0 w-[80vw] max-w-[320px] bg-warm-white border-r border-outline-variant/20 z-[101] p-6 flex flex-col md:hidden transition-transform duration-300 ease-in-out transform ${
+        className={`fixed top-0 left-0 bottom-0 w-[80vw] max-w-[320px] bg-warm-white border-r border-outline-variant/20 z-[101] p-6 flex flex-col lg:hidden transition-transform duration-300 ease-in-out transform ${
           isMenuOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >

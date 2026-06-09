@@ -245,7 +245,7 @@ const Faq = () => {
             <span className="font-body text-[13px] font-medium text-primary tracking-[0.2em] mb-4 block uppercase">
               Get Answers
             </span>
-            <h1 className="font-display text-[44px] md:text-[64px] text-espresso mb-6 leading-tight">
+            <h1 className="font-display text-[32px] sm:text-[44px] md:text-[64px] text-espresso mb-6 leading-tight">
               Frequently Asked <br className="hidden md:block" /><span className="italic text-primary">Questions</span>
             </h1>
             <p className="font-display text-[22px] md:text-[28px] text-primary italic mb-6">

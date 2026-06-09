@@ -41,27 +41,35 @@ const Home = () => {
           "latitude": 35.5026,
           "longitude": -97.5771
         },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday"
-          ],
-          "opens": "09:00",
-          "closes": "19:00"
-        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "11:00",
+            "closes": "20:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday"],
+            "opens": "00:00",
+            "closes": "00:00"
+          }
+        ],
         "areaServed": {
           "@type": "AdministrativeArea",
           "name": "Oklahoma City"
         },
         "sameAs": [
           "https://www.facebook.com/profile.php?id=61590243452121",
-          "https://www.instagram.com/jessica_eyebrowsthreading/"
+          "https://www.instagram.com/jessica_eyebrowsthreading/",
+          "https://www.threads.com/@jessica_eyebrowsthreading?xmt=AQG0Uix70op_dvISdls92_T5ca9kvQbsIam619J_Y37W7cc"
         ]
       },
       {
@@ -120,7 +128,7 @@ const Home = () => {
   return (
     <div className="pt-20 md:pt-28 overflow-x-hidden">
       <Helmet>
-        <title>Eyebrow Threading | Jessica Eyebrow Threading — Oklahoma City</title>
+        <title>Eyebrow Threading | Jessica Eyebrow Threading in Oklahoma City</title>
         <meta name="description" content="Book professional eyebrow threading, brow shaping & lamination at Jessica Eyebrow Threading in Oklahoma City, OK. Same-day appointments available. Call today!" />
         <meta name="keywords" content="eyebrow threading Oklahoma City, brow lamination OKC, facial threading near me, brow studio Oklahoma" />
         <link rel="canonical" href="https://jessicaeyebrowthreading.com/" />
@@ -133,7 +141,7 @@ const Home = () => {
         <meta name="ICBM" content="35.5026, -97.5771" />
         
         {/* Open Graph Tags */}
-        <meta property="og:title" content="Eyebrow Threading | Jessica Eyebrow Threading — Oklahoma City" />
+        <meta property="og:title" content="Eyebrow Threading | Jessica Eyebrow Threading in Oklahoma City" />
         <meta property="og:description" content="Book professional eyebrow threading, brow shaping & lamination at Jessica Eyebrow Threading in Oklahoma City, OK. Same-day appointments available. Call today!" />
         <meta property="og:url" content="https://jessicaeyebrowthreading.com/" />
         <meta property="og:type" content="website" />
@@ -167,7 +175,7 @@ const Home = () => {
             </h1>
             <p className="font-body text-[16px] md:text-[18px] text-on-surface-variant mb-8 max-w-xl leading-relaxed">
               Experience precision eyebrow threading, flawless brow shaping, and luxury beauty services
-              in Oklahoma City — designed to enhance your natural beauty with elegance and care.
+              in Oklahoma City, designed to enhance your natural beauty with elegance and care.
             </p>
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-6">
               <Link to="/pricing#book-appointment" className="btn-primary text-center">
@@ -257,7 +265,7 @@ const Home = () => {
               </div>
               <h3 className="font-display text-[22px] text-espresso mb-3">Our Philosophy</h3>
               <p className="font-body text-[15px] text-on-surface-variant leading-relaxed mb-5">
-                At Jessica Eyebrow Threading, beauty is more than a service — it is confidence, self-care,
+                 At Jessica Eyebrow Threading, beauty is more than a service; it is confidence, self-care,
                 and transformation. We specialize in precise threading designed for women who want clean,
                 defined, natural-looking brows without harsh chemicals or irritation.
               </p>
@@ -311,7 +319,7 @@ const Home = () => {
       {/* Featured Services */}
       <section className="py-section-v-mobile md:py-section-v-desktop bg-background" ref={servicesRef}>
         <div className="max-w-desktop-max-width mx-auto px-margin-mobile md:px-gutter">
-          <div className={`flex flex-col md:flex-row justify-between items-end mb-16 gap-6 transition-all duration-700 ease-out ${servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className={`flex flex-col items-center text-center mb-16 gap-4 transition-all duration-700 ease-out ${servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div>
               <span className="font-body text-[13px] font-medium text-primary tracking-[0.2em] mb-3 block uppercase">Our Menu</span>
               <h2 className="font-display text-[32px] md:text-[42px] text-espresso">
@@ -365,7 +373,7 @@ const Home = () => {
               Our threading specialists carefully shape each brow to complement your natural beauty, creating cleaner symmetry, softer definition, and effortless confidence.
             </p>
             <p className="font-body text-[16px] md:text-[18px] text-primary font-medium italic">
-              At Jessica Eyebrow Threading, every detail matters — because your brows deserve artistry, not shortcuts.
+               At Jessica Eyebrow Threading, every detail matters because your brows deserve artistry, not shortcuts.
             </p>
          </div>
       </section>
@@ -383,7 +391,7 @@ const Home = () => {
             </h2>
             <div className="w-16 h-[2px] bg-dusty-peach/30 mx-auto mt-6"></div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {[
               { quote: 'Jessica is a brow genius! She took her time mapping out my eyebrows to match my face shape. The threading was incredibly precise and painless. My brows have never looked so symmetrical and clean.', name: 'Sarah K.' },
               { quote: 'This place is a hidden gem. Super clean, peaceful, and beautifully designed. Jessica was so gentle and did an amazing job with my brow lamination. Best beauty experience in OKC!', name: 'Sophia M.' },
@@ -428,6 +436,9 @@ const Home = () => {
               <div className="flex gap-6">
                  <a href="https://www.instagram.com/jessica_eyebrowsthreading/" target="_blank" rel="noopener noreferrer" className="font-body text-[13px] font-medium text-espresso hover:text-primary tracking-[0.15em] uppercase border-b border-espresso hover:border-primary py-2 transition-all duration-300 flex items-center gap-2">
                    Instagram
+                 </a>
+                 <a href="https://www.threads.com/@jessica_eyebrowsthreading?xmt=AQG0Uix70op_dvISdls92_T5ca9kvQbsIam619J_Y37W7cc" target="_blank" rel="noopener noreferrer" className="font-body text-[13px] font-medium text-espresso hover:text-primary tracking-[0.15em] uppercase border-b border-espresso hover:border-primary py-2 transition-all duration-300 flex items-center gap-2">
+                   Threads
                  </a>
                  <a href="https://www.facebook.com/profile.php?id=61590243452121" target="_blank" rel="noopener noreferrer" className="font-body text-[13px] font-medium text-espresso hover:text-primary tracking-[0.15em] uppercase border-b border-espresso hover:border-primary py-2 transition-all duration-300 flex items-center gap-2">
                    Facebook
@@ -485,7 +496,7 @@ const Home = () => {
                     <span className="material-symbols-outlined text-primary text-xl mt-0.5" data-icon="schedule">schedule</span>
                     <div>
                       <p className="font-display text-[18px] text-espresso font-semibold">Hours</p>
-                      <p className="font-body text-[14px] text-on-surface-variant mt-1">Tue – Sat: 9:00 AM CST – 7:00 PM CST<br />Sun – Mon: Closed</p>
+                      <p className="font-body text-[14px] text-on-surface-variant mt-1">Tue – Sun: 11:00 AM CST – 8:00 PM CST<br />Monday: Closed</p>
                     </div>
                   </div>
                 </div>

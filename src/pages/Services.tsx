@@ -139,9 +139,13 @@ const Services = () => {
       {/* Hero Section */}
       <section className="max-w-desktop-max-width mx-auto px-margin-mobile md:px-gutter mb-section-v-mobile md:mb-section-v-desktop relative">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          <div className={`lg:col-span-5 z-10 lg:-mr-overlap-offset transition-all duration-700 ease-out ${heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <h1 className="font-display text-[42px] md:text-[68px] text-espresso mb-6 leading-tight">Beauty Services in <br/><span className="italic text-primary">Oklahoma City</span></h1>
-            <p className="font-display text-[22px] text-on-surface-variant mb-8 max-w-md">Experience the meticulous artistry of our threading and beauty services. Each treatment is tailored to your unique features in a serene, intimate environment.</p>
+          <div className={`lg:col-span-5 z-10 transition-all duration-700 ease-out ${heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className="bg-white/90 backdrop-blur-md p-6 sm:p-8 lg:p-12 rounded-2xl border border-[#d5c3b9]/40 shadow-xl lg:-mr-40 relative">
+              <span className="font-body text-[12px] md:text-[13px] font-medium text-primary tracking-[0.2em] mb-4 block uppercase">Our Menu</span>
+              <h1 className="font-display text-[32px] sm:text-[40px] md:text-[56px] text-espresso mb-6 leading-tight">Beauty Services in <br/><span className="italic text-primary">Oklahoma City</span></h1>
+              <p className="font-display text-[18px] md:text-[20px] text-on-surface-variant leading-relaxed mb-6">Experience the meticulous artistry of our threading and beauty services. Each treatment is tailored to your unique features in a serene, intimate environment.</p>
+              <div className="w-12 h-[2px] bg-primary/20"></div>
+            </div>
           </div>
           <div className={`lg:col-span-7 relative transition-all duration-700 ease-out delay-200 ${heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="w-full h-[400px] md:h-[600px] bg-toasted-cream rounded-sm overflow-hidden shadow-2xl relative">

@@ -290,7 +290,7 @@ const Pricing = () => {
             </div>
           ) : (
             /* ── 3-column booking layout ── */
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr_280px] gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1fr_1fr_280px] gap-6">
 
               {/* ── Col 1: Calendar ── */}
               <div className="bg-white/60 rounded-lg p-4 border border-[#d5c3b9]/30">
@@ -336,7 +336,7 @@ const Pricing = () => {
                         disabled={past}
                         onClick={() => { setSelectedDay(day); setSelectedTime(null); }}
                         className={[
-                          'relative mx-auto w-9 h-9 flex items-center justify-center rounded-full font-body text-[13px] transition-all duration-150',
+                          'relative mx-auto w-10 h-10 flex items-center justify-center rounded-full font-body text-[13px] transition-all duration-150',
                           past      ? 'text-[#d5c3b9] cursor-not-allowed'
                           : selected ? 'bg-primary text-white shadow-md scale-105'
                           : isToday  ? 'border border-primary text-primary font-semibold hover:bg-[#E8C9B5]/40'
@@ -370,7 +370,7 @@ const Pricing = () => {
                     <p className="font-body text-[12px] text-on-surface-variant mb-3 font-medium uppercase tracking-widest">
                       {MONTHS[viewMonth]} {selectedDay} — Available Times
                     </p>
-                    <div className="grid grid-cols-3 gap-2 max-h-[300px] overflow-y-auto pr-1">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 max-h-[300px] overflow-y-auto pr-1">
                       {TIME_SLOTS.map(slot => {
                         const blocked  = blockedSlots.includes(slot);
                         const isChosen = slot === selectedTime;
@@ -406,7 +406,7 @@ const Pricing = () => {
               </div>
 
               {/* ── Col 3: Right panel — Services list + form ── */}
-              <div className="bg-white/60 rounded-lg p-4 border border-[#d5c3b9]/30 flex flex-col gap-3">
+              <div className="bg-white/60 rounded-lg p-4 border border-[#d5c3b9]/30 flex flex-col gap-3 md:col-span-2 lg:col-span-1">
 
                 {/* Services multi-select list */}
                 <div>
