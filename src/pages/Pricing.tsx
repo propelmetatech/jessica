@@ -57,11 +57,28 @@ const DAYS   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 const MONTHS = ['January','February','March','April','May','June',
                 'July','August','September','October','November','December'];
 
-const TIME_SLOTS = [
-  '9:00 AM CST','9:30 AM CST','10:00 AM CST','10:30 AM CST','11:00 AM CST','11:30 AM CST',
-  '12:00 PM CST','12:30 PM CST','1:00 PM CST','1:30 PM CST','2:00 PM CST','2:30 PM CST',
-  '3:00 PM CST','3:30 PM CST','4:00 PM CST','4:30 PM CST','5:00 PM CST',
-];
+const getSlotsForDay = (dayOfWeek: number) => {
+  // Tuesday (2) – Thursday (4)
+  if (dayOfWeek >= 2 && dayOfWeek <= 4) {
+    return [
+      '11:00 AM CST', '11:30 AM CST', '12:00 PM CST', '12:30 PM CST',
+      '1:00 PM CST', '1:30 PM CST', '2:00 PM CST', '2:30 PM CST',
+      '3:00 PM CST', '3:30 PM CST', '4:00 PM CST', '4:30 PM CST',
+      '5:00 PM CST', '5:30 PM CST', '6:00 PM CST', '6:30 PM CST'
+    ];
+  }
+  // Friday (5) – Sunday (0)
+  if (dayOfWeek === 5 || dayOfWeek === 6 || dayOfWeek === 0) {
+    return [
+      '11:00 AM CST', '11:30 AM CST', '12:00 PM CST', '12:30 PM CST',
+      '1:00 PM CST', '1:30 PM CST', '2:00 PM CST', '2:30 PM CST',
+      '3:00 PM CST', '3:30 PM CST', '4:00 PM CST', '4:30 PM CST',
+      '5:00 PM CST', '5:30 PM CST', '6:00 PM CST', '6:30 PM CST',
+      '7:00 PM CST', '7:30 PM CST'
+    ];
+  }
+  return [];
+};
 
 const BLOCKED: Record<string, string[]> = {};
 
@@ -237,7 +254,7 @@ const Pricing = () => {
                           {svc.name}
                         </h3>
                         <div className="dot-leader" />
-                        <span className="font-body text-[16px] text-on-surface-variant group-hover:text-primary transition-colors font-medium">{svc.price}</span>
+                        <span className="font-body text-[16px] text-on-surface-variant group-hover:text-primary transition-colors font-medium w-10 text-left flex-shrink-0">{svc.price}</span>
                       </div>
                     </div>
                   ))}
@@ -326,25 +343,28 @@ const Pricing = () => {
                 <div className="grid grid-cols-7 gap-y-1">
                   {Array.from({ length: firstDayOfWeek }).map((_, i) => <div key={`e-${i}`} />)}
                   {Array.from({ length: daysInMonth }, (_, i) => i + 1).map(day => {
+                    const d          = new Date(viewYear, viewMonth, day);
+                    const isMonday   = d.getDay() === 1;
                     const past       = isPast(day);
+                    const closed     = isMonday;
                     const isToday    = day === today.getDate() && viewMonth === today.getMonth() && viewYear === today.getFullYear();
                     const selected   = day === selectedDay;
                     const hasBlocked = !!BLOCKED[String(day)];
                     return (
                       <button
                         key={day}
-                        disabled={past}
+                        disabled={past || closed}
                         onClick={() => { setSelectedDay(day); setSelectedTime(null); }}
                         className={[
                           'relative mx-auto w-10 h-10 flex items-center justify-center rounded-full font-body text-[13px] transition-all duration-150',
-                          past      ? 'text-[#d5c3b9] cursor-not-allowed'
+                          (past || closed) ? 'text-[#d5c3b9] cursor-not-allowed opacity-40'
                           : selected ? 'bg-primary text-white shadow-md scale-105'
                           : isToday  ? 'border border-primary text-primary font-semibold hover:bg-[#E8C9B5]/40'
                           :            'text-[#1c1c19] hover:bg-[#E8C9B5]/40 cursor-pointer',
                         ].join(' ')}
                       >
                         {day}
-                        {!past && hasBlocked && !selected && (
+                        {!past && !closed && hasBlocked && !selected && (
                           <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#E8C9B5]" />
                         )}
                       </button>
@@ -371,7 +391,7 @@ const Pricing = () => {
                       {MONTHS[viewMonth]} {selectedDay} — Available Times
                     </p>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 max-h-[300px] overflow-y-auto pr-1">
-                      {TIME_SLOTS.map(slot => {
+                      {selectedDay && getSlotsForDay(new Date(viewYear, viewMonth, selectedDay).getDay()).map(slot => {
                         const blocked  = blockedSlots.includes(slot);
                         const isChosen = slot === selectedTime;
                         return (

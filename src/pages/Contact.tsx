@@ -215,7 +215,11 @@ const Contact = () => {
                 </div>
                 <div className="font-body text-[14px] text-on-surface-variant leading-relaxed space-y-1">
                   <div className="flex justify-between gap-4">
-                    <span className="text-on-surface font-medium">Tue – Sun</span>
+                    <span className="text-on-surface font-medium">Tue – Thu</span>
+                    <span>11:00 AM CST – 7:00 PM CST</span>
+                  </div>
+                  <div className="flex justify-between gap-4">
+                    <span className="text-on-surface font-medium">Fri – Sun</span>
                     <span>11:00 AM CST – 8:00 PM CST</span>
                   </div>
                   <div className="flex justify-between gap-4">

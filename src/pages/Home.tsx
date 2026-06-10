@@ -89,7 +89,7 @@ const Home = () => {
         "url": "https://jessicaeyebrowthreading.com/",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://jessicaeyebrowthreading.com/Logo.jpeg"
+          "url": "https://jessicaeyebrowthreading.com/Logo.webp"
         }
       },
       {
@@ -496,7 +496,11 @@ const Home = () => {
                     <span className="material-symbols-outlined text-primary text-xl mt-0.5" data-icon="schedule">schedule</span>
                     <div>
                       <p className="font-display text-[18px] text-espresso font-semibold">Hours</p>
-                      <p className="font-body text-[14px] text-on-surface-variant mt-1">Tue – Sun: 11:00 AM CST – 8:00 PM CST<br />Monday: Closed</p>
+                      <p className="font-body text-[14px] text-on-surface-variant mt-1">
+                        Tue – Thu: 11:00 AM CST – 7:00 PM CST<br />
+                        Fri – Sun: 11:00 AM CST – 8:00 PM CST<br />
+                        Monday: Closed
+                      </p>
                     </div>
                   </div>
                 </div>

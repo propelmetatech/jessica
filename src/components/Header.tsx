@@ -49,7 +49,7 @@ const Header = () => {
         } backdrop-blur-md`}
       >
         <Link to="/" className="flex items-center gap-3">
-          <img src="/Logo.jpeg" alt="Jessica Eyebrow Threading Logo" className="w-12 h-12 rounded-full object-cover border border-outline-variant/30" />
+          <img src="/Logo.webp" alt="Jessica Eyebrow Threading Logo" className="w-12 h-12 rounded-full object-cover border border-outline-variant/30" />
           <div className="flex flex-col">
             <span className="font-display italic text-primary text-[26px] leading-none">Jessica</span>
             <span className="font-body text-[11px] font-medium text-on-surface-variant tracking-widest uppercase">Eyebrow Threading</span>
@@ -88,7 +88,7 @@ const Header = () => {
           <span className="material-symbols-outlined" data-icon="menu">menu</span>
         </button>
         <Link to="/" className="flex items-center gap-2">
-          <img src="/Logo.jpeg" alt="Jessica Eyebrow Threading Logo" className="w-9 h-9 rounded-full object-cover border border-outline-variant/30" />
+          <img src="/Logo.webp" alt="Jessica Eyebrow Threading Logo" className="w-9 h-9 rounded-full object-cover border border-outline-variant/30" />
           <div className="flex flex-col">
             <span className="font-display italic text-primary text-[22px] leading-none">Jessica</span>
             <span className="font-body text-[9px] font-medium text-on-surface-variant tracking-widest uppercase mt-0.5 hidden min-[360px]:block">Eyebrow Threading</span>
@@ -115,7 +115,7 @@ const Header = () => {
       >
         <div className="flex justify-between items-center pb-4 border-b border-outline-variant/20">
           <Link to="/" onClick={() => setIsMenuOpen(false)} className="flex items-center gap-2">
-            <img src="/Logo.jpeg" alt="Jessica Eyebrow Threading Logo" className="w-9 h-9 rounded-full object-cover border border-outline-variant/30" />
+            <img src="/Logo.webp" alt="Jessica Eyebrow Threading Logo" className="w-9 h-9 rounded-full object-cover border border-outline-variant/30" />
             <div className="flex flex-col">
               <span className="font-display italic text-primary text-[22px] leading-none">Jessica</span>
               <span className="font-body text-[9px] font-medium text-on-surface-variant tracking-widest uppercase mt-0.5">Eyebrow Threading</span>

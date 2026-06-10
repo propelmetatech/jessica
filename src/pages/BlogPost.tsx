@@ -70,7 +70,7 @@ const BlogPost = () => {
           "name": "Jessica Eyebrow Threading",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://jessicaeyebrowthreading.com/Logo.jpeg"
+            "url": "https://jessicaeyebrowthreading.com/Logo.webp"
           }
         },
         "mainEntityOfPage": {
