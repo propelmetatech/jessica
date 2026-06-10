@@ -16,7 +16,7 @@ const Footer = () => {
       <div className="w-full max-w-desktop-max-width mx-auto px-6 md:px-12 py-8 grid grid-cols-3 gap-4 text-left">
 
         {/* Col 1 — Opening Hours */}
-        <div className="flex flex-col items-start gap-3">
+        <div className="flex flex-col items-start gap-3 w-fit md:mx-auto">
           <span className="font-body text-[12px] md:text-[13px] tracking-[0.2em] uppercase text-toasted-cream/30">Hours</span>
           <div className="w-6 h-px bg-toasted-cream/10"></div>
           <div className="flex flex-col gap-2">
@@ -36,7 +36,7 @@ const Footer = () => {
         </div>
 
         {/* Col 2 — Useful Links */}
-        <div className="flex flex-col items-start gap-3">
+        <div className="flex flex-col items-start gap-3 w-fit md:mx-auto">
           <span className="font-body text-[12px] md:text-[13px] tracking-[0.2em] uppercase text-toasted-cream/30">Useful Links</span>
           <div className="w-6 h-px bg-toasted-cream/10"></div>
           <div className="grid grid-cols-2 gap-x-4 gap-y-2">
@@ -51,7 +51,7 @@ const Footer = () => {
         </div>
 
         {/* Col 3 — Connect */}
-        <div className="flex flex-col items-start gap-3">
+        <div className="flex flex-col items-start gap-3 w-fit md:mx-auto">
           <span className="font-body text-[12px] md:text-[13px] tracking-[0.2em] uppercase text-toasted-cream/30">Connect</span>
           <div className="w-6 h-px bg-toasted-cream/10"></div>
           <a className="font-body text-[14px] md:text-[16px] text-toasted-cream/60 hover:text-dusty-peach transition-colors text-left" href="https://www.instagram.com/jessica_eyebrowsthreading/" target="_blank" rel="noopener noreferrer">Instagram</a>
