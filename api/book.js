@@ -1,4 +1,4 @@
-const { sendCustomerConfirmation, sendMerchantAlert } = require('./emailService.cjs');
+const { sendCustomerConfirmation, sendMerchantAlert } = require('./emailService.js');
 
 /**
  * Vercel Serverless Function for booking.

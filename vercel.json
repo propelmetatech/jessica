@@ -1,16 +1,13 @@
 {
   "version": 2,
+  "functions": {
+    "api/*.js": {
+      "runtime": "@vercel/node@3"
+    }
+  },
   "rewrites": [
     {
-      "source": "/api/book",
-      "destination": "/api/book"
-    },
-    {
-      "source": "/api/booked-slots",
-      "destination": "/api/booked-slots"
-    },
-    {
-      "source": "/(.*)",
+      "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
   ]
