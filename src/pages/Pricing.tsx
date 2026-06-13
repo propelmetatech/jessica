@@ -96,8 +96,12 @@ const Pricing = () => {
   const [selectedTime,     setSelectedTime]     = useState<string | null>(null);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [name,  setName]  = useState('');
+  const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [confirmed, setConfirmed] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [blocked, setBlocked] = useState<Record<string, string[]>>({});
 
   /* scroll to booking block when arriving via /pricing#book-appointment */
   useEffect(() => {
@@ -108,6 +112,14 @@ const Pricing = () => {
       }, 100);
     }
   }, [location]);
+
+  // Fetch booked slots from backend
+  useEffect(() => {
+    fetch('http://localhost:5000/api/booked-slots')
+      .then(res => res.json())
+      .then(data => setBlocked(data))
+      .catch(err => console.error('Failed to fetch booked slots:', err));
+  }, [confirmed]);
 
   const daysInMonth    = getDaysInMonth(viewYear, viewMonth);
   const firstDayOfWeek = getFirstDay(viewYear, viewMonth);
@@ -129,7 +141,8 @@ const Pricing = () => {
     return d < t;
   };
 
-  const blockedSlots = selectedDay ? (BLOCKED[String(selectedDay)] ?? []) : [];
+  const dateKey = selectedDay ? `${MONTHS[viewMonth]} ${selectedDay}, ${viewYear}` : '';
+  const blockedSlots = dateKey ? (blocked[dateKey] ?? []) : [];
 
   const toggleService = (id: string) =>
     setSelectedServices(prev =>
@@ -146,13 +159,50 @@ const Pricing = () => {
     return sum + (svc ? parseInt(svc.duration) : 0);
   }, 0);
 
-  const handleConfirm = () => {
-    if (!selectedDay || !selectedTime || selectedServices.length === 0 || !name) return;
-    setConfirmed(true);
+  const handleConfirm = async () => {
+    if (!selectedDay || !selectedTime || selectedServices.length === 0 || !name || !email || !phone) return;
+    
+    setSubmitting(true);
+    setSubmitError(null);
+
+    const bookingData = {
+      customer_name: name,
+      customer_email: email,
+      customer_phone: phone,
+      service: selectedServices.map(id => {
+        const svc = ALL_SERVICES.find(s => s.id === id);
+        return `${svc?.name} (${svc?.price})`;
+      }).join(', '),
+      booking_date: `${MONTHS[viewMonth]} ${selectedDay}, ${viewYear}`,
+      booking_time: selectedTime,
+      total_price: `$${totalPrice}`
+    };
+
+    try {
+      const response = await fetch('http://localhost:5000/api/book', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(bookingData)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to book appointment. Please try again.');
+      }
+
+      setConfirmed(true);
+    } catch (err: any) {
+      setSubmitError(err.message || 'Something went wrong. Please check if backend is running.');
+    } finally {
+      setSubmitting(false);
+    }
   };
+
   const handleReset = () => {
     setConfirmed(false); setSelectedDay(null); setSelectedTime(null);
-    setSelectedServices([]); setName(''); setPhone('');
+    setSelectedServices([]); setName(''); setPhone(''); setEmail('');
+    setSubmitting(false); setSubmitError(null);
   };
 
   const schema = {
@@ -349,7 +399,8 @@ const Pricing = () => {
                     const closed     = isMonday;
                     const isToday    = day === today.getDate() && viewMonth === today.getMonth() && viewYear === today.getFullYear();
                     const selected   = day === selectedDay;
-                    const hasBlocked = !!BLOCKED[String(day)];
+                    const dateStr    = `${MONTHS[viewMonth]} ${day}, ${viewYear}`;
+                    const hasBlocked = !!blocked[dateStr] && blocked[dateStr].length > 0;
                     return (
                       <button
                         key={day}
@@ -506,9 +557,21 @@ const Pricing = () => {
                   />
                 </div>
 
+                {/* Email */}
+                <div>
+                  <label className="font-body text-[11px] text-on-surface-variant block mb-1">Email *</label>
+                  <input
+                    type="email"
+                    placeholder="yourname@example.com"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    className="w-full bg-white border border-[#d5c3b9]/60 rounded-md px-3 py-2 font-body text-[13px] text-[#1c1c19] placeholder-[#d5c3b9] focus:outline-none focus:border-primary transition-colors"
+                  />
+                </div>
+
                 {/* Phone */}
                 <div>
-                  <label className="font-body text-[11px] text-on-surface-variant block mb-1">Phone (optional)</label>
+                  <label className="font-body text-[11px] text-on-surface-variant block mb-1">Phone *</label>
                   <input
                     type="tel"
                     placeholder="+1 555 000 0000"
@@ -526,12 +589,17 @@ const Pricing = () => {
                 )}
 
                 {/* Confirm button */}
+                {submitError && (
+                  <p className="font-body text-[12px] text-red-600 text-center mb-1 font-medium">
+                    ⚠️ {submitError}
+                  </p>
+                )}
                 <button
                   onClick={handleConfirm}
-                  disabled={!selectedDay || !selectedTime || selectedServices.length === 0 || !name}
+                  disabled={!selectedDay || !selectedTime || selectedServices.length === 0 || !name || !email || !phone || submitting}
                   className="btn-primary w-full mt-auto disabled:opacity-40 disabled:cursor-not-allowed"
                 >
-                  <span>Confirm Booking</span>
+                  <span>{submitting ? 'Processing...' : 'Confirm Booking'}</span>
                 </button>
               </div>
 
