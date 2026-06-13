@@ -37,8 +37,9 @@ app.post(['/api/book', '/book'], async (req, res) => {
 
   console.log(`[Server] New booking request received for ${customer_name} - ${service}`);
 
-  // Send emails asynchronously (so the customer doesn't wait for SMTP handshakes)
-  Promise.allSettled([
+  // Send emails and wait for them to complete before responding
+  // In Vercel and other serverless environments, background promises are cancelled when the response is returned
+  await Promise.allSettled([
     sendCustomerConfirmation({
       customer_name,
       customer_email,
@@ -67,8 +68,8 @@ app.post(['/api/book', '/book'], async (req, res) => {
     });
   });
 
-  // Instantly return success to the client
-  return res.status(200).json({ message: 'Booking request received and is being processed.' });
+  // Return success to the client after emails are processed
+  return res.status(200).json({ message: 'Booking request received and processed.' });
 });
 
 // Global error handler
