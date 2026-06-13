@@ -1,5 +1,9 @@
 const nodemailer = require('nodemailer');
-require('dotenv').config();
+// Note: dotenv is NOT needed on Vercel — env vars are injected by the platform.
+// Only use dotenv for local development.
+if (process.env.NODE_ENV !== 'production') {
+  try { require('dotenv').config(); } catch (e) { /* dotenv not installed in prod */ }
+}
 
 // Create transporter using environment variables
 const transporter = nodemailer.createTransport({
