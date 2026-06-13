@@ -80,8 +80,6 @@ const getSlotsForDay = (dayOfWeek: number) => {
   return [];
 };
 
-const BLOCKED: Record<string, string[]> = {};
-
 const getDaysInMonth = (y: number, m: number) => new Date(y, m + 1, 0).getDate();
 const getFirstDay    = (y: number, m: number) => new Date(y, m, 1).getDay();
 
@@ -115,7 +113,7 @@ const Pricing = () => {
 
   // Fetch booked slots from backend
   useEffect(() => {
-    fetch('http://localhost:5000/api/booked-slots')
+    fetch('/api/booked-slots')
       .then(res => res.json())
       .then(data => setBlocked(data))
       .catch(err => console.error('Failed to fetch booked slots:', err));
@@ -179,7 +177,7 @@ const Pricing = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:5000/api/book', {
+      const response = await fetch('/api/book', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

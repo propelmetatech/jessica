@@ -72,6 +72,10 @@ app.post('/api/book', async (req, res) => {
 });
 
 // Start server
-app.listen(PORT, () => {
-  console.log(`[Server] Jessica Parlour backend listening on port ${PORT}`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`[Server] Jessica Parlour backend listening on port ${PORT}`);
+  });
+}
+
+module.exports = app;
