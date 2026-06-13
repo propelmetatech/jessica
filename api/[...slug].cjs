@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { sendCustomerConfirmation, sendMerchantAlert } = require('./emailService');
+const { sendCustomerConfirmation, sendMerchantAlert } = require('./emailService.cjs');
 require('dotenv').config();
 
 const app = express();
@@ -14,12 +14,12 @@ app.use(cors());
 app.use(express.json());
 
 // Endpoint to get all booked slots
-app.get('/api/booked-slots', (req, res) => {
+app.get(['/api/booked-slots', '/booked-slots'], (req, res) => {
   return res.json(bookedSlots);
 });
 
 // Main booking endpoint
-app.post('/api/book', async (req, res) => {
+app.post(['/api/book', '/book'], async (req, res) => {
   const { customer_name, customer_email, customer_phone, service, booking_date, booking_time, total_price } = req.body;
 
   // Simple validation
@@ -69,6 +69,12 @@ app.post('/api/book', async (req, res) => {
 
   // Instantly return success to the client
   return res.status(200).json({ message: 'Booking request received and is being processed.' });
+});
+
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error('[Server Error]', err);
+  res.status(500).json({ error: 'Internal Server Error', details: err.message });
 });
 
 // Start server
