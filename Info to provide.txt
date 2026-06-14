@@ -1,0 +1,15 @@
+ The code has been successfully updated to use Vercel KV (Vercel's built-in Redis database plugin) for 100%
+  permanent, production-ready storage.
+
+  All you need to do now is provision the database in Vercel to make it work. Here is exactly what you need to do:
+
+  1. Go to your Vercel Dashboard and click on your website's project.
+  2. Click on the Storage tab at the top of the project page.
+  3. Click Create Database (or "Connect Store") and select KV (or Upstash Redis).
+  4. Give it a name (like  bookings-db ), choose a region close to your customers, and click Create.
+  5. Once created, make sure it is linked to your project's environment. (Vercel usually does this automatically and
+  injects the necessary environment variables).
+  6. Push this updated code to your GitHub repository (or deploy from your CLI). Vercel will build the new version.
+
+  That's it! Your Vercel serverless backend will automatically find the KV database and use it to permanently save
+  booked slots. The slots will now stay crossed out for everyone visiting the website, forever!

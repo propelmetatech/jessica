@@ -55,7 +55,7 @@ const Header = () => {
             <span className="font-body text-[11px] font-medium text-on-surface-variant tracking-widest uppercase">Eyebrow Threading</span>
           </div>
         </Link>
-        <nav className="flex gap-8">
+        <nav className="flex gap-4 xl:gap-8">
           {navLinks.map((link) => {
             const isActive = location.pathname === link.to;
             return (
@@ -73,7 +73,7 @@ const Header = () => {
             );
           })}
         </nav>
-        <Link to="/pricing#book-appointment" className="btn-primary">
+        <Link to="/pricing#book-appointment" className="btn-primary shrink-0 whitespace-nowrap">
           <span>BOOK NOW</span>
         </Link>
       </header>
@@ -94,7 +94,7 @@ const Header = () => {
             <span className="font-body text-[9px] font-medium text-on-surface-variant tracking-widest uppercase mt-0.5 hidden min-[360px]:block">Eyebrow Threading</span>
           </div>
         </Link>
-        <Link to="/pricing#book-appointment" className="btn-primary text-[10px] py-1.5 px-3 hidden xs:inline-flex min-[360px]:inline-flex">
+        <Link to="/pricing#book-appointment" className="btn-primary text-[12px] py-2 px-5 hidden xs:inline-flex min-[360px]:inline-flex shrink-0 whitespace-nowrap">
           <span>BOOK NOW</span>
         </Link>
       </header>

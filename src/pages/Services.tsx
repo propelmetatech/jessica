@@ -160,12 +160,12 @@ const Services = () => {
       <section className="bg-surface-container-low py-section-v-mobile md:py-section-v-desktop border-t border-outline-variant/20" ref={servicesRef}>
         <div className="max-w-desktop-max-width mx-auto px-margin-mobile md:px-gutter">
           <div className={`flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8 transition-all duration-700 ease-out ${servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div>
-              <h2 className="font-display text-[28px] md:text-[42px] text-espresso mb-2 md:mb-0">The <span className="italic text-primary">Menu</span></h2>
+            <div className="max-w-xl">
+              <h2 className="font-display text-[28px] md:text-[42px] text-espresso mb-2 md:mb-4">The <span className="italic text-primary">Menu</span></h2>
+              <p className="font-body text-[16px] text-on-surface-variant leading-relaxed">Select from our curated menu of threading and beauty services, performed with absolute precision.</p>
             </div>
-            <div className="flex flex-col md:items-end gap-5 max-w-sm text-left md:text-right">
-              <p className="font-body text-[16px] text-on-surface-variant">Select from our curated menu of threading and beauty services, performed with absolute precision.</p>
-              <Link to="/pricing#book-appointment" className="btn-primary inline-flex">
+            <div className="flex flex-col md:items-end gap-5 text-left md:text-right">
+              <Link to="/pricing#book-appointment" className="btn-primary inline-flex justify-center text-[11px] sm:text-[12px] md:text-[13px] py-3 px-4 md:py-4 md:px-8 shrink-0 whitespace-nowrap">
                 <span>BOOK YOUR APPOINTMENT TODAY</span>
               </Link>
             </div>

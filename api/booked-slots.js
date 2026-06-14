@@ -20,6 +20,7 @@ module.exports = async (req, res) => {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // Return empty — serverless has no persistent memory
-  return res.json({});
+  const { getBookedSlots } = require('./db.js');
+  const slots = await getBookedSlots();
+  return res.json(slots);
 };

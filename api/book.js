@@ -1,4 +1,5 @@
 const { sendCustomerConfirmation, sendMerchantAlert } = require('./emailService.js');
+const { addBooking, getBookedSlots } = require('./db.js');
 
 /**
  * Vercel Serverless Function for booking.
@@ -26,6 +27,12 @@ module.exports = async (req, res) => {
     if (!customer_name || !customer_email || !customer_phone || !service || !booking_date || !booking_time) {
       return res.status(400).json({ error: 'Missing required booking details.' });
     }
+    const booked = await getBookedSlots();
+    if (booked[booking_date] && booked[booking_date].includes(booking_time)) {
+      return res.status(409).json({ error: 'This slot is already booked. Please choose another time.' });
+    }
+
+    await addBooking(booking_date, booking_time);
 
     console.log(`[Server] New booking request received for ${customer_name} - ${service}`);
 
