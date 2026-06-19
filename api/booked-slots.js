@@ -1,14 +1,11 @@
 /**
- * Vercel Serverless Function for booked slots.
- *
- * NOTE: In serverless environments, in-memory state does NOT persist
- * between invocations. Each request runs in a fresh or cold-started
- * container. This endpoint will always return an empty object.
- * For production, connect to a database (e.g., Supabase, Firebase, MongoDB).
+ * Vercel Serverless Function — returns booked time slots for the calendar UI.
+ * Reads from Vercel KV in production, or from local-bookings.json during local development.
  */
+const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || 'https://jessicaeyebrowthreading.com';
+
 module.exports = async (req, res) => {
-  // Handle CORS
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Origin', ALLOWED_ORIGIN);
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 

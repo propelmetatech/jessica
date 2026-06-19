@@ -2,10 +2,22 @@ const nodemailer = require('nodemailer');
 // Note: dotenv is NOT needed on Vercel — env vars are injected by the platform.
 // Only use dotenv for local development.
 if (process.env.NODE_ENV !== 'production') {
-  try { require('dotenv').config(); } catch (e) { /* dotenv not installed in prod */ }
+  try { require('dotenv').config({ path: require('path').join(__dirname, '.env') }); } catch (e) { /* dotenv not installed */ }
 }
 
-// Create transporter using environment variables
+// ─── Startup env-check (visible in Vercel function logs on cold start) ────────
+const REQUIRED_ENV = ['EMAIL_HOST', 'EMAIL_PORT', 'EMAIL_USER', 'EMAIL_PASSWORD', 'EMAIL_FROM', 'MERCHANT_EMAIL'];
+const missingEnv = REQUIRED_ENV.filter(key => !process.env[key]);
+if (missingEnv.length > 0) {
+  console.error(`[EmailService] ⚠️  Missing env vars: ${missingEnv.join(', ')} — emails will fail!`);
+} else {
+  console.log('[EmailService] ✅ All email env vars are present.');
+}
+// ─────────────────────────────────────────────────────────────────────────────
+
+// Create transporter using environment variables.
+// IMPORTANT: EMAIL_FROM must match or be an alias of EMAIL_USER (the SMTP-authenticated sender).
+// Setting a From: header to a different domain will fail SPF/DKIM checks and be flagged as spam.
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
   port: parseInt(process.env.EMAIL_PORT || '587'),
@@ -16,14 +28,48 @@ const transporter = nodemailer.createTransport({
   }
 });
 
+// Verify SMTP connection on cold start so misconfigurations appear in Vercel logs immediately.
+transporter.verify((error) => {
+  if (error) {
+    console.error('[EmailService] ❌ SMTP connection failed:', error.message);
+  } else {
+    console.log('[EmailService] ✅ SMTP connection verified — ready to send.');
+  }
+});
+
+// ─── HTML escape helper — prevents XSS / malicious markup in email bodies ────
+const escapeHtml = (str) => {
+  if (typeof str !== 'string') return String(str ?? '');
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+};
+// ─────────────────────────────────────────────────────────────────────────────
+
 /**
  * Sends a booking confirmation email to the customer.
  */
 async function sendCustomerConfirmation({ customer_name, customer_email, service, booking_date, booking_time, total_price }) {
+  // The From address MUST match the SMTP-authenticated sender (EMAIL_USER).
+  // If you want replies to go to a different address, use replyTo.
+  const fromAddress = `"${process.env.EMAIL_FROM_NAME || 'Jessica Eyebrow Threading'}" <${process.env.EMAIL_FROM || process.env.EMAIL_USER}>`;
+  const replyToAddress = process.env.EMAIL_REPLY_TO || undefined;
+
+  // Escape all user-supplied values before embedding in HTML
+  const safeName    = escapeHtml(customer_name);
+  const safeService = escapeHtml(service);
+  const safeDate    = escapeHtml(booking_date);
+  const safeTime    = escapeHtml(booking_time);
+  const safePrice   = escapeHtml(total_price);
+
   const mailOptions = {
-    from: `"${process.env.EMAIL_FROM_NAME || 'Jessica Eyebrow Threading'}" <${process.env.EMAIL_FROM}>`,
+    from: fromAddress,
+    ...(replyToAddress && { replyTo: replyToAddress }),
     to: customer_email,
-    subject: `Your Booking is Confirmed — ${service} on ${booking_date}`,
+    subject: `Your Booking is Confirmed — ${safeService} on ${safeDate}`,
     text: `Hello ${customer_name},\n\nYour appointment is confirmed!\n\nService: ${service}\nTotal Price: ${total_price}\nDate: ${booking_date}\nTime: ${booking_time}\n\nLocation: 4503 Northwest 36th Street, Oklahoma City, OK 73122\nPhone: +1-572-240-5888\n\nWe look forward to seeing you!\n- Jessica Eyebrow Threading`,
     html: `
       <!DOCTYPE html>
@@ -113,25 +159,25 @@ async function sendCustomerConfirmation({ customer_name, customer_email, service
             <h1>Jessica Eyebrow Threading</h1>
           </div>
           <div class="content">
-            <p>Hello <strong>${customer_name}</strong>,</p>
+            <p>Hello <strong>${safeName}</strong>,</p>
             <p>Thank you for booking with us! Your appointment has been successfully scheduled and confirmed.</p>
             
             <div class="details-card">
               <div class="details-row">
                 <span class="details-label">Service(s):</span>
-                <span class="details-val">${service}</span>
+                <span class="details-val">${safeService}</span>
               </div>
               <div class="details-row">
                 <span class="details-label">Total Price:</span>
-                <span class="details-val" style="font-weight: bold; color: #7E5232;">${total_price}</span>
+                <span class="details-val" style="font-weight: bold; color: #7E5232;">${safePrice}</span>
               </div>
               <div class="details-row">
                 <span class="details-label">Date:</span>
-                <span class="details-val">${booking_date}</span>
+                <span class="details-val">${safeDate}</span>
               </div>
               <div class="details-row">
                 <span class="details-label">Time:</span>
-                <span class="details-val">${booking_time}</span>
+                <span class="details-val">${safeTime}</span>
               </div>
             </div>
 
@@ -165,10 +211,23 @@ async function sendCustomerConfirmation({ customer_name, customer_email, service
  * Sends a new booking alert email to the merchant.
  */
 async function sendMerchantAlert({ customer_name, customer_email, customer_phone, service, booking_date, booking_time, total_price }) {
+  const fromAddress = `"${process.env.EMAIL_FROM_NAME || 'Jessica Eyebrow Threading'}" <${process.env.EMAIL_FROM || process.env.EMAIL_USER}>`;
+  const replyToAddress = process.env.EMAIL_REPLY_TO || undefined;
+
+  // Escape all user-supplied values before embedding in HTML
+  const safeName    = escapeHtml(customer_name);
+  const safeEmail   = escapeHtml(customer_email);
+  const safePhone   = escapeHtml(customer_phone);
+  const safeService = escapeHtml(service);
+  const safeDate    = escapeHtml(booking_date);
+  const safeTime    = escapeHtml(booking_time);
+  const safePrice   = escapeHtml(total_price);
+
   const mailOptions = {
-    from: `"${process.env.EMAIL_FROM_NAME || 'Jessica Eyebrow Threading'}" <${process.env.EMAIL_FROM}>`,
-    to: process.env.MERCHANT_EMAIL || 'renexatechnologies@gmail.com',
-    subject: `New Booking — ${customer_name} — ${booking_date} ${booking_time}`,
+    from: fromAddress,
+    ...(replyToAddress && { replyTo: replyToAddress }),
+    to: process.env.MERCHANT_EMAIL,
+    subject: `New Booking — ${safeName} — ${safeDate} ${safeTime}`,
     text: `New booking received!\n\nCustomer Details:\n- Name: ${customer_name}\n- Email: ${customer_email}\n- Phone: ${customer_phone}\n\nBooking Details:\n- Service(s): ${service}\n- Total Price: ${total_price}\n- Date: ${booking_date}\n- Time: ${booking_time}`,
     html: `
       <!DOCTYPE html>
@@ -224,31 +283,31 @@ async function sendMerchantAlert({ customer_name, customer_email, customer_phone
           <table>
             <tr>
               <th>Customer Name</th>
-              <td>${customer_name}</td>
+              <td>${safeName}</td>
             </tr>
             <tr>
               <th>Customer Email</th>
-              <td><a href="mailto:${customer_email}">${customer_email}</a></td>
+              <td><a href="mailto:${safeEmail}">${safeEmail}</a></td>
             </tr>
             <tr>
               <th>Customer Phone</th>
-              <td><a href="tel:${customer_phone}">${customer_phone}</a></td>
+              <td><a href="tel:${safePhone}">${safePhone}</a></td>
             </tr>
             <tr>
               <th>Service(s)</th>
-              <td>${service}</td>
+              <td>${safeService}</td>
             </tr>
             <tr>
               <th>Total Price</th>
-              <td><strong>${total_price}</strong></td>
+              <td><strong>${safePrice}</strong></td>
             </tr>
             <tr>
               <th>Date</th>
-              <td>${booking_date}</td>
+              <td>${safeDate}</td>
             </tr>
             <tr>
               <th>Time</th>
-              <td>${booking_time}</td>
+              <td>${safeTime}</td>
             </tr>
           </table>
           

@@ -166,7 +166,7 @@ const Contact = () => {
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
                     <span className="material-symbols-outlined text-primary text-xl" data-icon="storefront">storefront</span>
                   </div>
-                  <h2 className="font-body text-[11px] font-semibold tracking-[0.15em] uppercase text-espresso">Boutique Location</h2>
+                  <h2 className="font-body text-[11px] font-semibold tracking-[0.15em] uppercase text-espresso">Jessica Eyebrow Threading</h2>
                 </div>
                 <div className="font-body text-[15px] text-on-surface-variant leading-relaxed space-y-0.5 mb-5">
                   <p>4503 Northwest 36th Street,</p>
@@ -176,10 +176,12 @@ const Contact = () => {
                   href="https://maps.google.com/?q=4503+NW+36th+St+Oklahoma+City+OK"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 font-body text-[12px] font-medium text-primary tracking-wider uppercase group-hover:gap-2.5 transition-all duration-300 py-2 -my-2"
+                  className="btn-primary inline-flex items-center gap-2 text-[12px] py-2 px-5"
                 >
-                  Get Directions
-                  <span className="material-symbols-outlined text-[16px]" data-icon="arrow_forward">arrow_forward</span>
+                  <span className="inline-flex items-center gap-2">
+                    Get Directions
+                    <span className="material-symbols-outlined text-[15px]" data-icon="arrow_forward">arrow_forward</span>
+                  </span>
                 </a>
               </div>
 
@@ -213,18 +215,18 @@ const Contact = () => {
                   </div>
                   <h2 className="font-body text-[11px] font-semibold tracking-[0.15em] uppercase text-espresso">Hours</h2>
                 </div>
-                <div className="font-body text-[14px] text-on-surface-variant leading-relaxed space-y-1">
-                  <div className="flex justify-between gap-4">
-                    <span className="text-on-surface font-medium">Tue – Thu</span>
-                    <span>11:00 AM CST – 7:00 PM CST</span>
+                <div className="font-body text-[14px] text-on-surface-variant leading-relaxed space-y-3">
+                  <div>
+                    <p className="text-on-surface font-medium">Tue – Thu</p>
+                    <p>11:00 AM CST – 7:00 PM CST</p>
                   </div>
-                  <div className="flex justify-between gap-4">
-                    <span className="text-on-surface font-medium">Fri – Sun</span>
-                    <span>11:00 AM CST – 8:00 PM CST</span>
+                  <div>
+                    <p className="text-on-surface font-medium">Fri – Sun</p>
+                    <p>11:00 AM CST – 8:00 PM CST</p>
                   </div>
-                  <div className="flex justify-between gap-4">
-                    <span className="text-on-surface font-medium">Monday</span>
-                    <span className="text-primary">Closed</span>
+                  <div>
+                    <p className="text-on-surface font-medium">Monday</p>
+                    <p className="text-primary">Closed</p>
                   </div>
                 </div>
               </div>
