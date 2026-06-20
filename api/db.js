@@ -14,7 +14,8 @@ if (fs.existsSync(keyPath)) {
     scopes: ['https://www.googleapis.com/auth/calendar'],
   });
   try {
-    calendarIdCache = require('../google-credentials.json').client_email;
+    const creds = require('../google-credentials.json');
+    calendarIdCache = process.env.GOOGLE_CALENDAR_ID || creds.client_email;
   } catch (err) {}
 } else if (process.env.GOOGLE_CLIENT_EMAIL && process.env.GOOGLE_PRIVATE_KEY) {
   // Production (Vercel) - using Environment Variables
@@ -25,7 +26,7 @@ if (fs.existsSync(keyPath)) {
     },
     scopes: ['https://www.googleapis.com/auth/calendar'],
   });
-  calendarIdCache = process.env.GOOGLE_CLIENT_EMAIL;
+  calendarIdCache = process.env.GOOGLE_CALENDAR_ID || process.env.GOOGLE_CLIENT_EMAIL;
 } else {
   console.error("Missing Google Credentials! Add google-credentials.json or set GOOGLE_CLIENT_EMAIL & GOOGLE_PRIVATE_KEY in .env");
 }
@@ -42,7 +43,9 @@ const parseDateTime = (dateStr, timeStr) => {
   const month = String(d.getMonth() + 1).padStart(2, '0');
   const day = String(d.getDate()).padStart(2, '0');
 
-  const [time, modifier] = timeStr.split(' ');
+  // Strip timezone suffix like " CST" before parsing
+  const cleanTime = timeStr.replace(/\s*(CST|CDT|EST|PST|MST)$/i, '');
+  const [time, modifier] = cleanTime.split(' ');
   let [hours, minutes] = time.split(':');
   if (hours === '12') hours = '00';
   if (modifier === 'PM') hours = String(parseInt(hours, 10) + 12);
