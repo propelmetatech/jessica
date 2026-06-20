@@ -32,3 +32,4 @@ dist-ssr
 api/local-bookings.json
 google-credentials.json
 api/.env
+convo.md
