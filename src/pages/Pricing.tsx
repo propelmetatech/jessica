@@ -61,20 +61,20 @@ const getSlotsForDay = (dayOfWeek: number) => {
   // Tuesday (2) – Thursday (4)
   if (dayOfWeek >= 2 && dayOfWeek <= 4) {
     return [
-      '11:00 AM CST', '11:30 AM CST', '12:00 PM CST', '12:30 PM CST',
-      '1:00 PM CST', '1:30 PM CST', '2:00 PM CST', '2:30 PM CST',
-      '3:00 PM CST', '3:30 PM CST', '4:00 PM CST', '4:30 PM CST',
-      '5:00 PM CST', '5:30 PM CST', '6:00 PM CST', '6:30 PM CST'
+      '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM',
+      '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM',
+      '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM',
+      '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM'
     ];
   }
   // Friday (5) – Sunday (0)
   if (dayOfWeek === 5 || dayOfWeek === 6 || dayOfWeek === 0) {
     return [
-      '11:00 AM CST', '11:30 AM CST', '12:00 PM CST', '12:30 PM CST',
-      '1:00 PM CST', '1:30 PM CST', '2:00 PM CST', '2:30 PM CST',
-      '3:00 PM CST', '3:30 PM CST', '4:00 PM CST', '4:30 PM CST',
-      '5:00 PM CST', '5:30 PM CST', '6:00 PM CST', '6:30 PM CST',
-      '7:00 PM CST', '7:30 PM CST'
+      '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM',
+      '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM',
+      '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM',
+      '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM',
+      '7:00 PM', '7:30 PM'
     ];
   }
   return [];

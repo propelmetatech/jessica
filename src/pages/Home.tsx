@@ -497,8 +497,8 @@ const Home = () => {
                     <div>
                       <p className="font-display text-[18px] text-espresso font-semibold">Hours</p>
                       <p className="font-body text-[14px] text-on-surface-variant mt-1">
-                        Tue – Thu: 11:00 AM CST – 7:00 PM CST<br />
-                        Fri – Sun: 11:00 AM CST – 8:00 PM CST<br />
+                        Tue – Thu: 11:00 AM – 7:00 PM<br />
+                        Fri – Sun: 11:00 AM – 8:00 PM<br />
                         Monday: Closed
                       </p>
                     </div>

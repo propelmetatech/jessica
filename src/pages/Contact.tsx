@@ -218,11 +218,11 @@ const Contact = () => {
                 <div className="font-body text-[14px] text-on-surface-variant leading-relaxed space-y-3">
                   <div>
                     <p className="text-on-surface font-medium">Tue – Thu</p>
-                    <p>11:00 AM CST – 7:00 PM CST</p>
+                    <p>11:00 AM – 7:00 PM</p>
                   </div>
                   <div>
                     <p className="text-on-surface font-medium">Fri – Sun</p>
-                    <p>11:00 AM CST – 8:00 PM CST</p>
+                    <p>11:00 AM – 8:00 PM</p>
                   </div>
                   <div>
                     <p className="text-on-surface font-medium">Monday</p>
