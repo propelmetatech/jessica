@@ -86,7 +86,7 @@ const getBookedSlots = async () => {
         minute: '2-digit',
         timeZone: 'America/Chicago'
       });
-      timeKey = timeKey.replace(/\u202f/g, ' ').replace(/am|pm/i, match => match.toUpperCase());
+      timeKey = timeKey.replace(/\u202f/g, ' ').replace(/am|pm/i, match => match.toUpperCase()) + ' CST';
       
       if (!booked[dateKey]) booked[dateKey] = [];
       if (!booked[dateKey].includes(timeKey)) booked[dateKey].push(timeKey);
