@@ -30,3 +30,5 @@ dist-ssr
 
 # Local development data (never commit)
 api/local-bookings.json
+google-credentials.json
+api/.env

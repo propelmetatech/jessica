@@ -5,7 +5,7 @@ require('dotenv').config({ path: './api/.env' });
 // For local dev, default ALLOWED_ORIGIN to localhost so the API handlers don't block Vite's dev server.
 // In production this is set in the Vercel dashboard.
 if (!process.env.ALLOWED_ORIGIN) {
-  process.env.ALLOWED_ORIGIN = 'http://localhost:5173';
+  process.env.ALLOWED_ORIGIN = '*';
 }
 
 const app = express();
@@ -34,11 +34,13 @@ const runHandler = (handler) => {
 const healthHandler = require('./api/health.js');
 const bookHandler = require('./api/book.js');
 const bookedSlotsHandler = require('./api/booked-slots.js');
+const cancelHandler = require('./api/cancel.js');
 
 // Routes
 app.all('/api/health', runHandler(healthHandler));
 app.all('/api/book', runHandler(bookHandler));
 app.all('/api/booked-slots', runHandler(bookedSlotsHandler));
+app.all('/api/cancel', runHandler(cancelHandler));
 
 // Global fallback
 app.use((req, res) => {

@@ -52,7 +52,7 @@ const escapeHtml = (str) => {
 /**
  * Sends a booking confirmation email to the customer.
  */
-async function sendCustomerConfirmation({ customer_name, customer_email, service, booking_date, booking_time, total_price }) {
+async function sendCustomerConfirmation({ customer_name, customer_email, service, booking_date, booking_time, total_price, eventId, startTime, endTime }) {
   // The From address MUST match the SMTP-authenticated sender (EMAIL_USER).
   // If you want replies to go to a different address, use replyTo.
   const fromAddress = `"${process.env.EMAIL_FROM_NAME || 'Jessica Eyebrow Threading'}" <${process.env.EMAIL_FROM || process.env.EMAIL_USER}>`;
@@ -64,13 +64,57 @@ async function sendCustomerConfirmation({ customer_name, customer_email, service
   const safeDate    = escapeHtml(booking_date);
   const safeTime    = escapeHtml(booking_time);
   const safePrice   = escapeHtml(total_price);
+  const safeEventId = eventId ? encodeURIComponent(eventId) : '';
+  const baseUrl     = process.env.API_BASE_URL || 'https://jessicaeyebrowthreading.com';
+  const cancelLink  = safeEventId ? `${baseUrl}/api/cancel?eventId=${safeEventId}` : '';
+
+  // Generate calendar dates for ICS and Google link
+  let icsContent = '';
+  let googleCalLink = '';
+  if (startTime && endTime) {
+    const formatICSDate = (ds) => new Date(ds).toISOString().replace(/[-:]/g, '').replace('.000', '');
+    const icsStart = formatICSDate(startTime);
+    const icsEnd = formatICSDate(endTime);
+    const icsNow = formatICSDate(new Date());
+
+    icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Jessica Eyebrow Threading//EN
+METHOD:REQUEST
+BEGIN:VEVENT
+UID:${eventId || Date.now()}@jessicaeyebrowthreading.com
+DTSTAMP:${icsNow}
+DTSTART:${icsStart}
+DTEND:${icsEnd}
+SUMMARY:Jessica Eyebrow Threading - ${service}
+DESCRIPTION:Appointment for ${service}.
+LOCATION:4503 Northwest 36th Street, Oklahoma City, OK 73122
+STATUS:CONFIRMED
+SEQUENCE:0
+END:VEVENT
+END:VCALENDAR`;
+
+    const gcalTitle = encodeURIComponent(`Jessica Eyebrow Threading - ${service}`);
+    const gcalDetails = encodeURIComponent(`Appointment for ${service}.`);
+    const gcalLocation = encodeURIComponent(`4503 Northwest 36th Street, Oklahoma City, OK 73122`);
+    googleCalLink = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${gcalTitle}&dates=${icsStart}/${icsEnd}&details=${gcalDetails}&location=${gcalLocation}`;
+  }
 
   const mailOptions = {
     from: fromAddress,
     ...(replyToAddress && { replyTo: replyToAddress }),
     to: customer_email,
     subject: `Your Booking is Confirmed — ${safeService} on ${safeDate}`,
-    text: `Hello ${customer_name},\n\nYour appointment is confirmed!\n\nService: ${service}\nTotal Price: ${total_price}\nDate: ${booking_date}\nTime: ${booking_time}\n\nLocation: 4503 Northwest 36th Street, Oklahoma City, OK 73122\nPhone: +1-572-240-5888\n\nWe look forward to seeing you!\n- Jessica Eyebrow Threading`,
+    ...(icsContent && {
+      attachments: [
+        {
+          filename: 'invite.ics',
+          content: Buffer.from(icsContent, 'utf-8'),
+          contentType: 'text/calendar; method=REQUEST'
+        }
+      ]
+    }),
+    text: `Hello ${customer_name},\n\nYour appointment is confirmed!\n\nService: ${service}\nTotal Price: ${total_price}\nDate: ${booking_date}\nTime: ${booking_time}\n\nLocation: 4503 Northwest 36th Street, Oklahoma City, OK 73122\nPhone: +1-572-240-5888\n\n${cancelLink ? `To cancel your booking, visit: ${cancelLink}\n\n` : ''}We look forward to seeing you!\n- Jessica Eyebrow Threading`,
     html: `
       <!DOCTYPE html>
       <html>
@@ -139,6 +183,29 @@ async function sendCustomerConfirmation({ customer_name, customer_email, service
           .details-val {
             color: #1c1c19;
           }
+          .btn-cancel {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 24px;
+            background-color: #e5dfdb;
+            color: #7E5232;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            text-align: center;
+          }
+          .btn-calendar {
+            display: inline-block;
+            margin-top: 15px;
+            margin-right: 10px;
+            padding: 12px 24px;
+            background-color: #4285F4;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            text-align: center;
+          }
           .footer {
             background-color: #f7efe6;
             padding: 20px;
@@ -185,7 +252,9 @@ async function sendCustomerConfirmation({ customer_name, customer_email, service
             4503 Northwest 36th Street, Oklahoma City, OK 73122<br>
             Phone: <a href="tel:+15722405888" style="color: #7E5232;">+1-572-240-5888</a></p>
             
-            <p style="margin-bottom: 0;">If you need to reschedule or cancel your visit, please call us at least 24 hours in advance.</p>
+            ${googleCalLink ? `<p style="margin-top: 30px; text-align: center;"><a href="${googleCalLink}" class="btn-calendar" target="_blank">Add to Google Calendar</a></p>` : ''}
+            
+            ${cancelLink ? `<p style="margin-top: 15px; text-align: center;">Need to cancel your visit? <br><a href="${cancelLink}" class="btn-cancel">Cancel Booking</a></p>` : `<p style="margin-bottom: 0;">If you need to reschedule or cancel your visit, please call us at least 24 hours in advance.</p>`}
           </div>
           <div class="footer">
             <p>&copy; ${new Date().getFullYear()} Jessica Eyebrow Threading. All rights reserved.</p>
@@ -210,9 +279,10 @@ async function sendCustomerConfirmation({ customer_name, customer_email, service
 /**
  * Sends a new booking alert email to the merchant.
  */
-async function sendMerchantAlert({ customer_name, customer_email, customer_phone, service, booking_date, booking_time, total_price }) {
+async function sendMerchantAlert({ customer_name, customer_email, customer_phone, service, booking_date, booking_time, total_price, eventId }) {
   const fromAddress = `"${process.env.EMAIL_FROM_NAME || 'Jessica Eyebrow Threading'}" <${process.env.EMAIL_FROM || process.env.EMAIL_USER}>`;
   const replyToAddress = process.env.EMAIL_REPLY_TO || undefined;
+  const baseUrl = process.env.API_BASE_URL || 'https://jessicaeyebrowthreading.com';
 
   // Escape all user-supplied values before embedding in HTML
   const safeName    = escapeHtml(customer_name);
@@ -222,6 +292,8 @@ async function sendMerchantAlert({ customer_name, customer_email, customer_phone
   const safeDate    = escapeHtml(booking_date);
   const safeTime    = escapeHtml(booking_time);
   const safePrice   = escapeHtml(total_price);
+  const safeEventId = eventId ? encodeURIComponent(eventId) : '';
+  const merchantCancelLink = safeEventId ? `${baseUrl}/api/cancel?eventId=${safeEventId}&source=merchant&customerEmail=${encodeURIComponent(customer_email)}` : '';
 
   const mailOptions = {
     from: fromAddress,
@@ -312,6 +384,13 @@ async function sendMerchantAlert({ customer_name, customer_email, customer_phone
           </table>
           
           <p>Please review and update the master schedule accordingly.</p>
+          ${merchantCancelLink ? `
+            <div style="margin-top: 30px; text-align: center;">
+              <p style="color: #d9534f; font-weight: bold; margin-bottom: 10px;">Need to cancel this appointment?</p>
+              <a href="${merchantCancelLink}" style="display: inline-block; padding: 12px 24px; background-color: #d9534f; color: #ffffff; text-decoration: none; border-radius: 6px; font-weight: bold;">Cancel Appointment</a>
+              <p style="font-size: 12px; color: #777; margin-top: 10px;">Clicking this will delete the event from your calendar and email the customer to let them know.</p>
+            </div>
+          ` : ''}
         </div>
       </body>
       </html>
@@ -329,7 +408,102 @@ async function sendMerchantAlert({ customer_name, customer_email, customer_phone
   }
 }
 
+/**
+ * Sends a cancellation alert email to the merchant.
+ */
+async function sendMerchantCancellationAlert({ summary, dateStr, timeStr }) {
+  const merchantEmail = process.env.MERCHANT_EMAIL;
+  if (!merchantEmail) {
+    console.warn('[Email Warning] MERCHANT_EMAIL not set. Skipping cancellation alert.');
+    return;
+  }
+
+  const fromAddress = `"${process.env.EMAIL_FROM_NAME || 'Jessica Eyebrow Threading'}" <${process.env.EMAIL_FROM || process.env.EMAIL_USER}>`;
+  const safeSummary = escapeHtml(summary || 'Unknown Service/Customer');
+  const safeDate = escapeHtml(dateStr || 'Unknown Date');
+  const safeTime = escapeHtml(timeStr || 'Unknown Time');
+
+  const mailOptions = {
+    from: fromAddress,
+    to: merchantEmail,
+    subject: `[CANCELLED] Appointment: ${safeSummary}`,
+    text: `An appointment has been cancelled.\n\nDetails:\n${safeSummary}\nDate: ${safeDate}\nTime: ${safeTime}\n\nThis event has been removed from your Google Calendar.`,
+    html: `
+      <!DOCTYPE html>
+      <html>
+      <body style="font-family: sans-serif; padding: 20px; color: #333;">
+        <h2 style="color: #d9534f;">Appointment Cancelled</h2>
+        <p>A customer has cancelled their appointment. It has been removed from your Google Calendar.</p>
+        <table style="text-align: left; border-collapse: collapse; width: 100%; max-width: 500px;">
+          <tr><th style="padding: 8px; border: 1px solid #ddd;">Details</th><td style="padding: 8px; border: 1px solid #ddd;">${safeSummary}</td></tr>
+          <tr><th style="padding: 8px; border: 1px solid #ddd;">Date</th><td style="padding: 8px; border: 1px solid #ddd;">${safeDate}</td></tr>
+          <tr><th style="padding: 8px; border: 1px solid #ddd;">Time</th><td style="padding: 8px; border: 1px solid #ddd;">${safeTime}</td></tr>
+        </table>
+      </body>
+      </html>
+    `
+  };
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log(`[Email] Merchant cancellation alert sent. Message ID: ${info.messageId}`);
+    return info;
+  } catch (error) {
+    console.error('[Email Error] Failed to send merchant cancellation alert:', error);
+    return null;
+  }
+}
+
+/**
+ * Sends a cancellation alert email to the customer (when merchant cancels).
+ */
+async function sendCustomerCancellationAlert({ customerEmail, summary, dateStr, timeStr }) {
+  if (!customerEmail) return;
+
+  const fromAddress = `"${process.env.EMAIL_FROM_NAME || 'Jessica Eyebrow Threading'}" <${process.env.EMAIL_FROM || process.env.EMAIL_USER}>`;
+  const replyToAddress = process.env.EMAIL_REPLY_TO || undefined;
+  const safeSummary = escapeHtml(summary || 'Unknown Service');
+  const safeDate = escapeHtml(dateStr || 'Unknown Date');
+  const safeTime = escapeHtml(timeStr || 'Unknown Time');
+
+  const mailOptions = {
+    from: fromAddress,
+    ...(replyToAddress && { replyTo: replyToAddress }),
+    to: customerEmail,
+    subject: `Update on your Booking: ${safeSummary}`,
+    text: `Hello,\n\nUnfortunately, we had to cancel your upcoming appointment.\n\nDetails:\n${safeSummary}\nDate: ${safeDate}\nTime: ${safeTime}\n\nWe apologize for any inconvenience. Please visit our website to rebook or call us at +1-572-240-5888.\n\n- Jessica Eyebrow Threading`,
+    html: `
+      <!DOCTYPE html>
+      <html>
+      <body style="font-family: sans-serif; padding: 20px; color: #333;">
+        <h2>Appointment Cancelled</h2>
+        <p>Hello,</p>
+        <p>Unfortunately, we had to cancel your upcoming appointment.</p>
+        <table style="text-align: left; border-collapse: collapse; width: 100%; max-width: 500px; margin-bottom: 20px;">
+          <tr><th style="padding: 8px; border: 1px solid #ddd;">Details</th><td style="padding: 8px; border: 1px solid #ddd;">${safeSummary}</td></tr>
+          <tr><th style="padding: 8px; border: 1px solid #ddd;">Date</th><td style="padding: 8px; border: 1px solid #ddd;">${safeDate}</td></tr>
+          <tr><th style="padding: 8px; border: 1px solid #ddd;">Time</th><td style="padding: 8px; border: 1px solid #ddd;">${safeTime}</td></tr>
+        </table>
+        <p>We sincerely apologize for the inconvenience. Please <a href="https://jessicaeyebrowthreading.com">visit our website</a> to rebook for another time, or call us at <strong>+1-572-240-5888</strong>.</p>
+        <p>- Jessica Eyebrow Threading</p>
+      </body>
+      </html>
+    `
+  };
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log(`[Email] Customer cancellation alert sent. Message ID: ${info.messageId}`);
+    return info;
+  } catch (error) {
+    console.error('[Email Error] Failed to send customer cancellation alert:', error);
+    return null;
+  }
+}
+
 module.exports = {
   sendCustomerConfirmation,
-  sendMerchantAlert
+  sendMerchantAlert,
+  sendMerchantCancellationAlert,
+  sendCustomerCancellationAlert
 };

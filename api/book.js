@@ -108,7 +108,10 @@ module.exports = async (req, res) => {
       return res.status(409).json({ error: 'This slot is already booked. Please choose another time.' });
     }
 
-    await addBooking(booking_date, booking_time);
+    const bookingEvent = await addBooking(booking_date, booking_time, customer_name, service, customer_email);
+    const eventId = bookingEvent?.id;
+    const startTime = bookingEvent?.start?.dateTime || bookingEvent?.start?.date;
+    const endTime = bookingEvent?.end?.dateTime || bookingEvent?.end?.date;
 
     console.log(`[Server] New booking request received for ${customer_name} - ${service}`);
 
@@ -121,7 +124,10 @@ module.exports = async (req, res) => {
         service,
         booking_date,
         booking_time,
-        total_price
+        total_price,
+        eventId, // Pass the Google Calendar Event ID
+        startTime,
+        endTime
       }),
       sendMerchantAlert({
         customer_name,
@@ -130,7 +136,8 @@ module.exports = async (req, res) => {
         service,
         booking_date,
         booking_time,
-        total_price
+        total_price,
+        eventId
       })
     ]);
 
