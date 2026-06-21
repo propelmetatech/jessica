@@ -198,7 +198,7 @@ const Pricing = () => {
 
           <div className="bg-white/60 rounded-lg border border-[#d5c3b9]/30 overflow-hidden">
             <InlineWidget 
-              url="https://calendly.com/klucky1123/30min" 
+              url="https://calendly.com/jessicaeyebrowthreading/30min" 
               styles={{ height: '700px', width: '100%' }} 
             />
           </div>
